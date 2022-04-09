@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_with_getx/data/repository/auth_repository.dart';
 import 'package:flutter_with_getx/ui/login/login_controller.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  final controller = Get.put(LoginController());
+  final controller = Get.put(LoginController(AuthRepository()));
 
   @override
   Widget build(BuildContext context) {

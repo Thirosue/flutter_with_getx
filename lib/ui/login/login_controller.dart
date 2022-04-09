@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_with_getx/data/model/response/session.dart';
+import 'package:flutter_with_getx/data/repository/auth_repository.dart';
 import 'package:get/get.dart';
 
 enum FormStatus { idle, loading, error, success }
 
 class LoginController extends GetxController {
+  final AuthRepository repository;
   final message = ''.obs;
   final status = (FormStatus.idle).obs;
 
   final emailController = TextEditingController(text: 'test@test.com');
   final passwordController = TextEditingController();
+
+  LoginController(this.repository);
 
   @override
   void onInit() {
@@ -32,8 +37,16 @@ class LoginController extends GetxController {
     message.value = 'Cheking input...';
     await wait(seconds: 1);
     _validate();
+
     if (FormStatus.idle == status.value) {
       status.value = FormStatus.loading;
+
+      final results = await repository.auth();
+      debugPrint(results.toString());
+
+      final session = Session.toList(results.data!);
+      debugPrint(session.first.toString());
+
       message.value = 'OK. Loading screen...';
       await wait(seconds: 1);
       status.value = FormStatus.success;
