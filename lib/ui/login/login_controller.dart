@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_with_getx/data/model/response/session.dart';
+import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
 import 'package:get/get.dart';
 
 enum FormStatus { idle, loading, error, success }
 
 class LoginController extends GetxController {
-  final AuthRepository repository;
+  final AuthRepository authRepository;
   final message = ''.obs;
   final status = (FormStatus.idle).obs;
+  final showPassword = false.obs;
 
-  final emailController = TextEditingController(text: 'test@test.com');
-  final passwordController = TextEditingController();
+  final email = ''.obs;
+  final password = ''.obs;
 
-  LoginController(this.repository);
+  LoginController(this.authRepository);
 
   @override
   void onInit() {
@@ -25,41 +27,53 @@ class LoginController extends GetxController {
     });
   }
 
-  @override
-  void onClose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.onClose();
-  }
-
   void login() async {
-    status.value = FormStatus.idle;
-    message.value = 'Cheking input...';
+    status.value = FormStatus.loading;
+    debugPrint('email: ${email.value}, password: ${password.value}');
+
+    final results = await authRepository.auth(
+      email: email.value,
+      password: password.value,
+    );
+    debugPrint(results.toString());
+
+    final session = Session.toList(results.data!).first;
+    final state = LocalState(
+      name: '${session.firstName} ${session.lastName}',
+      idToken: session.idToken,
+      refreshToken: session.refreshToken,
+      accessToken: session.accessToken,
+    );
+
+    debugPrint(state.toString());
+
+    message.value = 'OK. Loading screen...';
     await wait(seconds: 1);
-    _validate();
-
-    if (FormStatus.idle == status.value) {
-      status.value = FormStatus.loading;
-
-      final results = await repository.auth();
-      debugPrint(results.toString());
-
-      final session = Session.toList(results.data!);
-      debugPrint(session.first.toString());
-
-      message.value = 'OK. Loading screen...';
-      await wait(seconds: 1);
-      status.value = FormStatus.success;
-    }
+    status.value = FormStatus.success;
   }
 
-  void _validate() {
-    final isNotEmail = !GetUtils.isEmail(emailController.text.trim());
-    final isNotPassword = passwordController.text.trim().length < 8;
-    if (isNotEmail || isNotPassword) {
-      status.value = FormStatus.error;
-      message.value = 'Invalid email or Password';
+  String? emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '入力してください';
     }
+    if (!GetUtils.isEmail(value)) {
+      return 'E-mailを入力してください';
+    }
+    return null;
+  }
+
+  String? passwordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '入力してください';
+    }
+    if (value.length < 8) {
+      return '8文字以上で入力してください';
+    }
+    return null;
+  }
+
+  void togglePasswordVisible() {
+    showPassword.value = !showPassword.value;
   }
 }
 

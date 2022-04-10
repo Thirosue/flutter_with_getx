@@ -26,7 +26,10 @@ class AuthRepository {
     ),
   );
 
-  Future<ApiResponse> auth() async {
+  Future<ApiResponse> auth({
+    required String email,
+    required String password,
+  }) async {
     Response response;
     response = await dio.get(
       '/auth.post.json',
