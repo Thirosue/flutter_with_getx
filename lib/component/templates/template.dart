@@ -83,6 +83,7 @@ class Template extends StatelessWidget {
         currentIndex: index,
         selectedItemColor: Colors.redAccent,
         unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
         onTap: move,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
