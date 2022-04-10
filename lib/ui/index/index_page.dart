@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_with_getx/component/templates/template.dart';
+import 'package:flutter_with_getx/data/const/page_index.dart';
 import 'package:flutter_with_getx/ui/index/index_controller.dart';
 import 'package:get/get.dart';
 
@@ -9,11 +11,9 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Index Page'),
-      ),
-      body: Center(
+    return Template(
+      index: PageIndex.index,
+      child: Center(
         child: controller.obx(
           (state) => ListView.builder(
             itemCount: state!.length,
@@ -30,10 +30,6 @@ class IndexPage extends StatelessWidget {
           onEmpty: const Text('no data'),
           onLoading: const CircularProgressIndicator.adaptive(),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.refresh),
-        onPressed: controller.init,
       ),
     );
   }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/ui/index/index_page.dart';
 import 'package:flutter_with_getx/ui/login/login_page.dart';
+import 'package:flutter_with_getx/ui/qr/qr_page.dart';
+import 'package:flutter_with_getx/ui/settings/setting_page.dart';
+import 'package:flutter_with_getx/ui/user/user_page.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -16,10 +20,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
-      initialRoute: '/login',
+      initialRoute: Path.login,
       getPages: [
-        GetPage(name: '/login', page: () => LoginPage()),
-        GetPage(name: '/', page: () => IndexPage()),
+        GetPage(name: Path.login, page: () => LoginPage()),
+        GetPage(name: Path.index, page: () => IndexPage()),
+        GetPage(name: Path.qr, page: () => const QrPage()),
+        GetPage(name: Path.user, page: () => const UserPage()),
+        GetPage(name: Path.settings, page: () => const SettingPage()),
       ],
     );
   }
