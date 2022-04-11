@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_with_getx/component/atoms/drawer_item.dart';
 import 'package:flutter_with_getx/data/const/page_index.dart';
 import 'package:flutter_with_getx/data/const/title_label.dart';
+import 'package:flutter_with_getx/data/model/menu.dart';
 import 'package:get/get.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
 
@@ -8,11 +10,27 @@ class Template extends StatelessWidget {
   final int index;
   final Widget child;
 
-  static final List<List<String>> naviList = [
-    [TitleLabel.index, Path.index],
-    [TitleLabel.qr, Path.qr],
-    [TitleLabel.user, Path.user],
-    [TitleLabel.settings, Path.settings],
+  static final List<Menu> menuList = [
+    const Menu(
+        title: TitleLabel.index,
+        path: Path.index,
+        icon: Icons.home,
+        index: PageIndex.index),
+    const Menu(
+        title: TitleLabel.qr,
+        path: Path.qr,
+        icon: Icons.qr_code,
+        index: PageIndex.qr),
+    const Menu(
+        title: TitleLabel.user,
+        path: Path.user,
+        icon: Icons.person,
+        index: PageIndex.user),
+    const Menu(
+        title: TitleLabel.settings,
+        path: Path.settings,
+        icon: Icons.settings,
+        index: PageIndex.settings),
   ];
 
   const Template({
@@ -22,7 +40,7 @@ class Template extends StatelessWidget {
   }) : super(key: key);
 
   void move(int index) {
-    Get.toNamed(naviList[index].last);
+    Get.toNamed(menuList[index].path);
   }
 
   @override
@@ -37,7 +55,7 @@ class Template extends StatelessWidget {
             },
           ),
         ),
-        title: Text(naviList[index].first),
+        title: Text(menuList[index].title),
       ),
       drawer: Drawer(
         child: ListView(
@@ -55,26 +73,10 @@ class Template extends StatelessWidget {
                 ),
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text(TitleLabel.index),
-              onTap: () => move(PageIndex.index),
-            ),
-            ListTile(
-              leading: const Icon(Icons.qr_code_outlined),
-              title: const Text(TitleLabel.qr),
-              onTap: () => move(PageIndex.qr),
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text(TitleLabel.user),
-              onTap: () => move(PageIndex.user),
-            ),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text(TitleLabel.settings),
-              onTap: () => move(PageIndex.settings),
-            ),
+            DrawerItem(menu: menuList[0]),
+            DrawerItem(menu: menuList[1]),
+            DrawerItem(menu: menuList[2]),
+            DrawerItem(menu: menuList[3]),
           ],
         ),
       ),
@@ -85,22 +87,22 @@ class Template extends StatelessWidget {
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         onTap: move,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: TitleLabel.index,
+            icon: Icon(menuList[0].icon),
+            label: menuList[0].title,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code),
-            label: TitleLabel.qr,
+            icon: Icon(menuList[1].icon),
+            label: menuList[1].title,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: TitleLabel.user,
+            icon: Icon(menuList[2].icon),
+            label: menuList[2].title,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: TitleLabel.settings,
+            icon: Icon(menuList[3].icon),
+            label: menuList[3].title,
           ),
         ],
       ),
