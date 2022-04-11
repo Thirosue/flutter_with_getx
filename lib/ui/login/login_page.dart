@@ -14,7 +14,11 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Image.asset(
+          'assets/images/logo.png',
+          height: 40,
+          width: 400,
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
