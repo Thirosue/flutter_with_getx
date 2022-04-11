@@ -2,16 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_with_getx/constants.dart';
 
 import '../model/response/api_response.dart';
 
 class AuthRepository {
-  static const String _baseUrl =
-      'https://thirosue.github.io/hosting-image2/flutter_study';
-
   final dio = Dio(
     BaseOptions(
-      baseUrl: _baseUrl,
+      baseUrl: Constants.of().endpoint,
       connectTimeout: 50000,
       receiveTimeout: 100000,
       // 5s
