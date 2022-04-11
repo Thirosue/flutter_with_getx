@@ -2,7 +2,7 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-enum Flavor { development, production }
+enum Profile { development, production }
 
 @immutable
 class Constants {
@@ -13,14 +13,14 @@ class Constants {
 
   factory Constants.of() {
     final flavor = EnumToString.fromString(
-      Flavor.values, 'development',
-      // const String.fromEnvironment('FLAVOR'),
+      Profile.values, 'development',
+      // const String.fromEnvironment('ENV'),
     );
 
     switch (flavor) {
-      case Flavor.development:
+      case Profile.development:
         return Constants._dev();
-      case Flavor.production:
+      case Profile.production:
       default:
         return Constants._prd();
     }
