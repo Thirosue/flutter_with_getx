@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_with_getx/data/model/response/session.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
+import 'package:flutter_with_getx/helpers/wait.dart';
 import 'package:get/get.dart';
 
 enum FormStatus { idle, loading, error, success }
@@ -52,31 +53,7 @@ class LoginController extends GetxController {
     status.value = FormStatus.success;
   }
 
-  String? emailValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return '入力してください';
-    }
-    if (!GetUtils.isEmail(value)) {
-      return 'E-mailを入力してください';
-    }
-    return null;
-  }
-
-  String? passwordValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return '入力してください';
-    }
-    if (value.length < 8) {
-      return '8文字以上で入力してください';
-    }
-    return null;
-  }
-
   void togglePasswordVisible() {
     showPassword.value = !showPassword.value;
   }
-}
-
-Future<void> wait({required int seconds}) async {
-  await Future.delayed(Duration(seconds: seconds));
 }

@@ -1,24 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_with_getx/component/templates/template.dart';
 import 'package:flutter_with_getx/data/const/page_index.dart';
+import 'package:flutter_with_getx/data/repository/user_repository.dart';
+import 'package:flutter_with_getx/helpers/error_handler.dart';
+import 'package:flutter_with_getx/ui/user/update/user_update_page.dart';
+import 'package:flutter_with_getx/ui/user/user_controller.dart';
+import 'package:get/get.dart';
 
 class UserPage extends StatelessWidget {
-  static const String _title = 'User';
-  const UserPage({Key? key}) : super(key: key);
+  UserPage({Key? key}) : super(key: key);
+
+  final controller = Get.put(UserController(UserRepository()));
 
   @override
   Widget build(BuildContext context) {
-    return const Template(
+    return Template(
       index: PageIndex.user,
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: SizedBox(
-          child: Text(
-            _title,
-            style: TextStyle(
-              fontSize: 25,
-            ),
+      child: Center(
+        child: controller.obx(
+          (state) => ListView.separated(
+            itemCount: state!.length,
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  onTap: () async {
+                    Get.to(
+                      () => UserUpdatePage(),
+                      arguments: state[index],
+                      fullscreenDialog: true,
+                    );
+                  },
+                  title: Text(state[index].name),
+                  leading: const Icon(Icons.person),
+                  trailing: const Icon(Icons.more_vert),
+                ),
+              );
+            },
+            separatorBuilder: (context, index) => const Divider(),
           ),
+          onLoading: const CircularProgressIndicator.adaptive(),
+          onError: ErrorHandler.onError,
         ),
       ),
     );

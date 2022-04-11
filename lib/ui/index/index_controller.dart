@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:flutter_with_getx/ui/login/login_controller.dart';
+import 'package:flutter_with_getx/helpers/wait.dart';
 import 'package:get/get.dart';
 
 class IndexController extends GetxController with StateMixin<List<String>> {

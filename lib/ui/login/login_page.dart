@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
+import 'package:flutter_with_getx/helpers/validator.dart';
 import 'package:flutter_with_getx/ui/login/login_controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,7 @@ class LoginPage extends StatelessWidget {
                 decoration: const InputDecoration(
                   labelText: 'E-mail',
                 ),
-                validator: controller.emailValidator,
+                validator: Vaildators.emailValidator,
                 onSaved: (value) => controller.email.value = value!,
               ),
               Obx(
@@ -46,7 +47,7 @@ class LoginPage extends StatelessWidget {
                       onPressed: controller.togglePasswordVisible,
                     ),
                   ),
-                  validator: controller.passwordValidator,
+                  validator: Vaildators.passwordValidator,
                   onSaved: (value) => controller.password.value = value!,
                 ),
               ),
