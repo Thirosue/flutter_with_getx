@@ -12,12 +12,12 @@ class Constants {
   });
 
   factory Constants.of() {
-    final flavor = EnumToString.fromString(
+    final profile = EnumToString.fromString(
       Profile.values, 'development',
       // const String.fromEnvironment('ENV'),
     );
 
-    switch (flavor) {
+    switch (profile) {
       case Profile.development:
         return Constants._dev();
       case Profile.production:
