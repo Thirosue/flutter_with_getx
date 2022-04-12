@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_with_getx/component/atoms/loading_indicator.dart';
 import 'package:flutter_with_getx/component/templates/template.dart';
 import 'package:flutter_with_getx/data/const/page_index.dart';
 import 'package:flutter_with_getx/data/repository/user_repository.dart';
@@ -40,7 +41,7 @@ class UserPage extends StatelessWidget {
               },
               separatorBuilder: (context, index) => const Divider(),
             ),
-            onLoading: const CircularProgressIndicator.adaptive(),
+            onLoading: const LoadingIndicator(),
             onError: ErrorHandler.onError,
           ),
         ),
