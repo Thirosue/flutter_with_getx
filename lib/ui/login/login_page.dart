@@ -62,6 +62,7 @@ class LoginPage extends StatelessWidget {
                     child: const Text('Login'),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
                         controller.login();
                       }
                     },

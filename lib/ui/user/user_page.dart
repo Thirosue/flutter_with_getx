@@ -16,30 +16,33 @@ class UserPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Template(
       index: PageIndex.user,
-      child: Center(
-        child: controller.obx(
-          (state) => ListView.separated(
-            itemCount: state!.length,
-            itemBuilder: (context, index) {
-              return Card(
-                child: ListTile(
-                  onTap: () async {
-                    Get.to(
-                      () => UserUpdatePage(),
-                      arguments: state[index],
-                      fullscreenDialog: true,
-                    );
-                  },
-                  title: Text(state[index].name),
-                  leading: const Icon(Icons.person),
-                  trailing: const Icon(Icons.more_vert),
-                ),
-              );
-            },
-            separatorBuilder: (context, index) => const Divider(),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        child: Center(
+          child: controller.obx(
+            (state) => ListView.separated(
+              itemCount: state!.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    onTap: () async {
+                      Get.to(
+                        () => UserUpdatePage(),
+                        arguments: state[index],
+                        fullscreenDialog: true,
+                      );
+                    },
+                    title: Text(state[index].name),
+                    leading: const Icon(Icons.person),
+                    trailing: const Icon(Icons.more_vert),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) => const Divider(),
+            ),
+            onLoading: const CircularProgressIndicator.adaptive(),
+            onError: ErrorHandler.onError,
           ),
-          onLoading: const CircularProgressIndicator.adaptive(),
-          onError: ErrorHandler.onError,
         ),
       ),
     );

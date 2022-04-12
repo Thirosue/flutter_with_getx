@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class UserUpdateController extends GetxController with StateMixin<User> {
   final UserRepository repository;
+  final User initData;
 
   final name = ''.obs;
   final email = ''.obs;
@@ -13,6 +14,7 @@ class UserUpdateController extends GetxController with StateMixin<User> {
 
   UserUpdateController({
     required this.repository,
+    required this.initData,
   });
 
   @override
@@ -21,17 +23,17 @@ class UserUpdateController extends GetxController with StateMixin<User> {
     change(null, status: RxStatus.success());
   }
 
-  Future<void> save(int id) async {
+  Future<void> save() async {
     try {
       change(null, status: RxStatus.loading());
       await wait(seconds: 2);
       final data = User(
-        id: id,
+        id: initData.id,
         name: name.value,
         email: email.value,
         tel: tel.value,
       );
-
+      debugPrint(data.toString());
       await repository.update(data);
       change(data, status: RxStatus.success());
     } catch (e) {

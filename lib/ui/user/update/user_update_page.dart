@@ -9,31 +9,31 @@ import 'package:get/get.dart';
 
 class UserUpdatePage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final controller = Get.put(
-    UserUpdateController(
-      repository: UserRepository(),
-    ),
-  );
 
   UserUpdatePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final User user = Get.arguments;
-    debugPrint(user.toString());
+
+    final controller = Get.put(
+      UserUpdateController(
+        repository: UserRepository(),
+        initData: user,
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('ユーザ更新'),
       ),
-      body: SingleChildScrollView(
+      body: Container(
         padding: const EdgeInsets.all(16),
         child: Center(
           child: controller.obx(
             (state) => Form(
               key: _formKey,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   TextFormField(
                     initialValue: user.name,
@@ -69,13 +69,14 @@ class UserUpdatePage extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
                             Get.defaultDialog(
                               title: '確認',
                               middleText: 'この内容で変更します',
                               textCancel: 'いいえ',
                               textConfirm: 'はい',
                               onConfirm: () async {
-                                await controller.save(user.id);
+                                await controller.save();
 
                                 Get.toNamed(Path.user);
                                 Get.snackbar(
