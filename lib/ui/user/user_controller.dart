@@ -10,13 +10,6 @@ class UserController extends GetxController with StateMixin<List<User>> {
 
   final keyword = ''.obs;
 
-  String? emptyValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return '入力してください';
-    }
-    return null;
-  }
-
   @override
   void onInit() async {
     super.onInit();
