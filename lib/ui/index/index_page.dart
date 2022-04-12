@@ -27,7 +27,10 @@ class IndexPage extends StatelessWidget {
           ),
           onEmpty: const Text('no data'),
           onLoading: const LoadingIndicator(),
-          onError: ErrorHandler.onError,
+          onError: ((error) => Text(
+                error!,
+                style: const TextStyle(color: Colors.red),
+              )),
         ),
       ),
     );

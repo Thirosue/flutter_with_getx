@@ -13,8 +13,8 @@ class LoginController extends GetxController {
   final status = (FormStatus.idle).obs;
   final showPassword = false.obs;
 
-  final email = ''.obs;
-  final password = ''.obs;
+  final email = 'test@test.com'.obs;
+  final password = 'password'.obs;
 
   LoginController(this.authRepository);
 

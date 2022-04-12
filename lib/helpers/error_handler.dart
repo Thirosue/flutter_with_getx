@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ErrorHandler {
   static Widget onError(String? error) {
     debugPrint(error.toString());
-    const title = 'システムエラー';
-    var message = error.toString();
-    Get.snackbar(
-      title,
-      message,
-      colorText: Colors.white,
-      backgroundColor: Colors.red,
+    EasyLoading.showError(
+      error.toString(),
+      duration: const Duration(
+        seconds: 30,
+      ),
+      dismissOnTap: true,
     );
     return const SizedBox.shrink();
   }

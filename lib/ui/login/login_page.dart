@@ -29,6 +29,7 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
+                initialValue: controller.email.value,
                 decoration: const InputDecoration(
                   labelText: 'E-mail',
                 ),
@@ -37,6 +38,7 @@ class LoginPage extends StatelessWidget {
               ),
               Obx(
                 () => TextFormField(
+                  initialValue: controller.password.value,
                   obscureText: !controller.showPassword.value,
                   decoration: InputDecoration(
                     labelText: 'Password',
