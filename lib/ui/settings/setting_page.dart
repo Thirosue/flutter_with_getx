@@ -17,13 +17,15 @@ class SettingPage extends StatelessWidget {
       index: PageIndex.settings,
       child: Container(
         padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          child: FormBuilderSwitch(
-            name: 'DarkMode',
-            initialValue: false,
-            title: const Text('ダークモード'),
-            onChanged: controller.changeTheme,
-          ),
+        child: Column(
+          children: [
+            FormBuilderSwitch(
+              name: 'DarkMode',
+              initialValue: false,
+              title: const Text('ダークモード'),
+              onChanged: controller.changeTheme,
+            )
+          ],
         ),
       ),
     );
