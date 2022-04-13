@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_with_getx/component/templates/template.dart';
 import 'package:flutter_with_getx/data/const/page_index.dart';
+import 'package:flutter_with_getx/ui/settings/setting_controller.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 
 class SettingPage extends StatelessWidget {
-  static const String _title = 'Settings';
   const SettingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Template(
+    final controller = Get.put(SettingController());
+
+    return Template(
       index: PageIndex.settings,
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
+      child: Container(
+        padding: const EdgeInsets.all(16),
         child: SizedBox(
-          child: Text(
-            _title,
-            style: TextStyle(
-              fontSize: 25,
-            ),
+          child: FormBuilderSwitch(
+            name: 'DarkMode',
+            initialValue: false,
+            title: const Text('ダークモード'),
+            onChanged: controller.changeTheme,
           ),
         ),
       ),
