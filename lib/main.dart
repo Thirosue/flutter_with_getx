@@ -7,19 +7,9 @@ import 'package:flutter_with_getx/ui/qr/qr_page.dart';
 import 'package:flutter_with_getx/ui/settings/setting_page.dart';
 import 'package:flutter_with_getx/ui/user/user_page.dart';
 import 'package:get/get.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
-Future<void> main() async {
-  await SentryFlutter.init(
-    (options) {
-      options.dsn =
-          'https://4709d9b8073a489cb875810865686c8a@o277236.ingest.sentry.io/6325413';
-      // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
-      // We recommend adjusting this value in production.
-      options.tracesSampleRate = 1.0;
-    },
-    appRunner: () => runApp(const MyApp()),
-  );
+void main() {
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

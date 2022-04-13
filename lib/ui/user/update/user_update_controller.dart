@@ -3,7 +3,6 @@ import 'package:flutter_with_getx/data/model/response/user.dart';
 import 'package:flutter_with_getx/data/repository/user_repository.dart';
 import 'package:flutter_with_getx/helpers/wait.dart';
 import 'package:get/get.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 class UserUpdateController extends GetxController with StateMixin<User> {
   final UserRepository repository;
@@ -38,7 +37,7 @@ class UserUpdateController extends GetxController with StateMixin<User> {
       await repository.update(data);
       change(data, status: RxStatus.success());
     } catch (exception, stackTrace) {
-      await Sentry.captureException(exception, stackTrace: stackTrace);
+      // await Sentry.captureException(exception, stackTrace: stackTrace);
       debugPrintStack(stackTrace: stackTrace);
       debugPrint("error captured...");
       change(null, status: RxStatus.error('Something is wrong.'));
