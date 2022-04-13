@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_with_getx/data/model/response/user.dart';
 import 'package:flutter_with_getx/data/repository/user_repository.dart';
 import 'package:flutter_with_getx/helpers/wait.dart';
@@ -25,7 +26,7 @@ class UserUpdateController extends GetxController with StateMixin<User> {
 
   Future<void> save() async {
     try {
-      change(null, status: RxStatus.loading());
+      EasyLoading.show(status: 'loading...');
       await wait(seconds: 2);
       final data = User(
         id: initData.id,
@@ -41,6 +42,8 @@ class UserUpdateController extends GetxController with StateMixin<User> {
       debugPrintStack(stackTrace: stackTrace);
       debugPrint("error captured...");
       change(null, status: RxStatus.error('Something is wrong.'));
+    } finally {
+      EasyLoading.dismiss();
     }
   }
 }

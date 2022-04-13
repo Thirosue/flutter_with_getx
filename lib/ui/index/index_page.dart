@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_with_getx/component/atoms/loading_indicator.dart';
 import 'package:flutter_with_getx/component/templates/template.dart';
 import 'package:flutter_with_getx/data/const/page_index.dart';
-import 'package:flutter_with_getx/helpers/error_handler.dart';
 import 'package:flutter_with_getx/ui/index/index_controller.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +24,6 @@ class IndexPage extends StatelessWidget {
             },
           ),
           onEmpty: const Text('no data'),
-          onLoading: const LoadingIndicator(),
           onError: ((error) => Text(
                 error!,
                 style: const TextStyle(color: Colors.red),

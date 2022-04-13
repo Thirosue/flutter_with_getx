@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_with_getx/helpers/wait.dart';
 import 'package:get/get.dart';
 
@@ -10,8 +11,8 @@ class IndexController extends GetxController with StateMixin<List<String>> {
   }
 
   void init() async {
+    EasyLoading.show(status: 'loading...');
     final random = Random().nextInt(10);
-    change(null, status: RxStatus.loading());
     await wait(seconds: 2);
 
     if (1 == random) {
@@ -25,5 +26,6 @@ class IndexController extends GetxController with StateMixin<List<String>> {
 
       change(data, status: RxStatus.success());
     }
+    EasyLoading.dismiss();
   }
 }

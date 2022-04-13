@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_with_getx/component/atoms/loading_indicator.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/data/model/response/user.dart';
 import 'package:flutter_with_getx/data/repository/user_repository.dart';
@@ -101,7 +100,6 @@ class UserUpdatePage extends StatelessWidget {
                 ],
               ),
             ),
-            onLoading: const LoadingIndicator(),
             onError: ErrorHandler.onError,
           ),
         ),
