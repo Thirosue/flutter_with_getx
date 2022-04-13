@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_with_getx/component/molecules/dialog_actions.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/data/model/response/user.dart';
 import 'package:flutter_with_getx/data/repository/user_repository.dart';
@@ -67,33 +68,30 @@ class UserUpdatePage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: ElevatedButton(
+                        child: const Text('変更する'),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             Get.defaultDialog(
                               title: '確認',
                               middleText: 'この内容で変更します',
-                              textCancel: 'いいえ',
-                              textConfirm: 'はい',
-                              onConfirm: () async {
-                                await controller.save();
+                              radius: 5.0,
+                              actions: DialogActions.create(
+                                context: context,
+                                onConfirm: () async {
+                                  await controller.save();
 
-                                Get.toNamed(Path.user);
-                                Get.snackbar(
-                                  'ユーザ更新',
-                                  'ユーザを更新しました',
-                                  snackPosition: SnackPosition.BOTTOM,
-                                );
-                              },
+                                  Get.toNamed(Path.user);
+                                  Get.snackbar(
+                                    'ユーザ更新',
+                                    'ユーザを更新しました',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                  );
+                                },
+                              ),
                             );
                           }
                         },
-                        child: const Text('変更する'),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.lightBlue,
-                          ),
-                        ),
                       ),
                     ),
                   ),
