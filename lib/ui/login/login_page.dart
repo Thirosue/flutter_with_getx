@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_with_getx/data/const/validate_messages.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
-import 'package:flutter_with_getx/helpers/validator.dart';
 import 'package:flutter_with_getx/ui/login/login_controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormBuilderState>();
 
   final controller = Get.put(LoginController(AuthRepository()));
 
@@ -23,21 +25,28 @@ class LoginPage extends StatelessWidget {
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
-        child: Form(
+        child: FormBuilder(
           key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextFormField(
+              FormBuilderTextField(
+                name: 'E-mail',
                 initialValue: controller.email.value,
                 decoration: const InputDecoration(
                   labelText: 'E-mail',
                 ),
-                validator: Vaildators.emailValidator,
                 onSaved: (value) => controller.email.value = value!,
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(
+                      errorText: ValidateMessages.required),
+                  FormBuilderValidators.email(
+                      errorText: ValidateMessages.email),
+                ]),
               ),
               Obx(
-                () => TextFormField(
+                () => FormBuilderTextField(
+                  name: 'Password',
                   initialValue: controller.password.value,
                   obscureText: !controller.showPassword.value,
                   decoration: InputDecoration(
@@ -49,7 +58,14 @@ class LoginPage extends StatelessWidget {
                       onPressed: controller.togglePasswordVisible,
                     ),
                   ),
-                  validator: Vaildators.passwordValidator,
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(
+                        errorText: ValidateMessages.required),
+                    FormBuilderValidators.minLength(
+                      8,
+                      errorText: ValidateMessages.min(8),
+                    ),
+                  ]),
                   onSaved: (value) => controller.password.value = value!,
                 ),
               ),

@@ -6,6 +6,7 @@ import 'package:flutter_with_getx/ui/login/login_page.dart';
 import 'package:flutter_with_getx/ui/qr/qr_page.dart';
 import 'package:flutter_with_getx/ui/settings/setting_page.dart';
 import 'package:flutter_with_getx/ui/user/user_page.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
+      localizationsDelegates: const [
+        FormBuilderLocalizations.delegate,
+      ],
       initialRoute: Path.login,
       getPages: [
         GetPage(name: Path.login, page: () => LoginPage()),
