@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/ui/index/index_page.dart';
@@ -19,9 +20,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final dark =
+        SchedulerBinding.instance?.window.platformBrightness == Brightness.dark;
+    debugPrint('darkmode: $dark');
+
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: dark ? ThemeData.dark() : ThemeData.light(),
       localizationsDelegates: const [
         FormBuilderLocalizations.delegate,
       ],
