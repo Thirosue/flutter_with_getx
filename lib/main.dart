@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
+import 'package:flutter_with_getx/ui/card/card_page.dart';
 import 'package:flutter_with_getx/ui/index/index_page.dart';
 import 'package:flutter_with_getx/ui/login/login_page.dart';
 import 'package:flutter_with_getx/ui/qr/qr_page.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: Path.index, page: () => IndexPage()),
         GetPage(name: Path.qr, page: () => const QrPage()),
         GetPage(name: Path.user, page: () => UserPage()),
+        GetPage(name: Path.card, page: () => const CardPage()),
         GetPage(name: Path.settings, page: () => const SettingPage()),
       ],
       builder: EasyLoading.init(),

@@ -27,6 +27,11 @@ class Template extends StatelessWidget {
         icon: Icons.person,
         index: PageIndex.user),
     const Menu(
+        title: TitleLabel.card,
+        path: Path.card,
+        icon: Icons.card_membership,
+        index: PageIndex.card),
+    const Menu(
         title: TitleLabel.settings,
         path: Path.settings,
         icon: Icons.settings,
@@ -61,22 +66,24 @@ class Template extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+            const SizedBox(
+              height: 130,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text(
+                  'Menu',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
                 ),
               ),
             ),
-            DrawerItem(menu: menuList[0]),
-            DrawerItem(menu: menuList[1]),
-            DrawerItem(menu: menuList[2]),
-            DrawerItem(menu: menuList[3]),
+            Column(
+              children: menuList.map((menu) => DrawerItem(menu: menu)).toList(),
+            ),
           ],
         ),
       ),
@@ -87,24 +94,14 @@ class Template extends StatelessWidget {
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         onTap: move,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(menuList[0].icon),
-            label: menuList[0].title,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(menuList[1].icon),
-            label: menuList[1].title,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(menuList[2].icon),
-            label: menuList[2].title,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(menuList[3].icon),
-            label: menuList[3].title,
-          ),
-        ],
+        items: menuList
+            .map(
+              (menu) => BottomNavigationBarItem(
+                icon: Icon(menu.icon),
+                label: menu.title,
+              ),
+            )
+            .toList(),
       ),
     );
   }

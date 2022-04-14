@@ -6,5 +6,6 @@ class TitleLabel {
   static const String index = 'Home';
   static const String qr = 'QR';
   static const String user = 'User';
+  static const String card = 'Card';
   static const String settings = 'Settings';
 }
