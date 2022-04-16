@@ -30,7 +30,7 @@ class CreditCard extends StatelessWidget {
     this.numberColor = Colors.white,
     this.validityColor = Colors.white,
     this.cardHolderNameColor = Colors.white,
-    this.showChip = true,
+    this.showChip = false,
   });
 
   @override
