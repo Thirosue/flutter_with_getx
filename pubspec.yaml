@@ -41,6 +41,7 @@ dependencies:
   flutter_easyloading: ^3.0.3
   flutter_form_builder: ^7.1.1
   form_builder_validators: ^8.0.0
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/
+
+  fonts:
+    - family: creditcard
+      fonts:
+        - asset: fonts/creditcard.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
