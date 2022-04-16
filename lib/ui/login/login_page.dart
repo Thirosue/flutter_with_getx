@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
-          'assets/images/logo.png',
+          'images/logo.png',
           height: 40,
           width: 400,
         ),
