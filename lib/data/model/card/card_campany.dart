@@ -1,6 +1,38 @@
 import 'package:flutter/material.dart';
 
+enum CardCompanyKey {
+  americanExpress,
+  virgin,
+  sbi,
+  sbiCard,
+  kotak,
+  axisBank,
+  axisBankWhite,
+  citiBank,
+  hdfc,
+  hsbc,
+  icici,
+  indusland,
+  yesBank,
+}
+
 class CardCompany {
+  static final Map<String, dynamic> _mapping = {
+    CardCompanyKey.americanExpress.name: CardCompany.americanExpress,
+    CardCompanyKey.virgin.name: CardCompany.virgin,
+    CardCompanyKey.sbi.name: CardCompany.sbi,
+    CardCompanyKey.sbiCard.name: CardCompany.sbiCard,
+    CardCompanyKey.kotak.name: CardCompany.kotak,
+    CardCompanyKey.axisBank.name: CardCompany.axisBank,
+    CardCompanyKey.axisBankWhite.name: CardCompany.axisBankWhite,
+    CardCompanyKey.citiBank.name: CardCompany.citiBank,
+    CardCompanyKey.hdfc.name: CardCompany.hdfc,
+    CardCompanyKey.hsbc.name: CardCompany.hsbc,
+    CardCompanyKey.icici.name: CardCompany.icici,
+    CardCompanyKey.indusland.name: CardCompany.indusland,
+    CardCompanyKey.yesBank.name: CardCompany.yesBank,
+  };
+
   static CardCompany americanExpress = const CardCompany(
     Text(
       'AMERICAN \nEXPRESS',
@@ -97,6 +129,11 @@ class CardCompany {
       height: 35,
     ),
   );
+
+  static CardCompany of(String key) {
+    assert(CardCompanyKey.values.map((key) => key.name).contains(key));
+    return _mapping[key];
+  }
 
   final Widget widget;
 

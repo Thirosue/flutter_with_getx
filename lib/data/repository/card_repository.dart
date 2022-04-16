@@ -6,11 +6,11 @@ import 'package:flutter_with_getx/data/remote/dio_client.dart';
 
 import '../model/response/api_response.dart';
 
-class UserRepository {
+class CardRepository {
   Future<ApiResponse> findAll() async {
     Response response;
     response = await defalutHttpClient.get(
-      '/user.get.json',
+      '/cards.get.json',
     );
 
     if (response.statusCode == 200) {

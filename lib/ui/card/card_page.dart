@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_with_getx/component/molecules/card/credit_card_slider.dart';
 import 'package:flutter_with_getx/component/molecules/card/credit_card_widget.dart';
@@ -7,69 +9,39 @@ import 'package:flutter_with_getx/data/model/card/card_background.dart';
 import 'package:flutter_with_getx/data/model/card/card_campany.dart';
 import 'package:flutter_with_getx/data/model/card/card_network_type.dart';
 import 'package:flutter_with_getx/data/model/card/validity.dart';
+import 'package:flutter_with_getx/data/repository/card_repository.dart';
+import 'package:flutter_with_getx/helpers/error_handler.dart';
+import 'package:flutter_with_getx/ui/card/card_controller.dart';
+import 'package:get/get.dart';
 
 Color kPink = const Color(0xFFEE4CBF);
 Color kRed = const Color(0xFFFA3754);
 Color kBlue = const Color(0xFF4AA3F2);
 Color kPurple = const Color(0xFFAF92FB);
 
-final creditCards = [
-  CreditCard(
-    cardBackground: SolidColorCardBackground(Colors.black.withOpacity(0.6)),
-    cardNetworkType: CardNetworkType.visaBasic,
-    cardHolderName: 'The boring developer',
-    cardNumber: '1234 1234 1234 1234',
-    company: CardCompany.yesBank,
-    validity: Validity(
-      validThruMonth: 1,
-      validThruYear: 21,
-      validFromMonth: 1,
-      validFromYear: 16,
-    ),
-  ),
-  CreditCard(
-    cardBackground: SolidColorCardBackground(kRed.withOpacity(0.4)),
-    cardNetworkType: CardNetworkType.mastercard,
-    cardHolderName: 'Gursheesh Singh',
-    cardNumber: '2434 2434 **** ****',
-    company: CardCompany.kotak,
-    validity: Validity(
-      validThruMonth: 1,
-      validThruYear: 21,
-    ),
-  ),
-  CreditCard(
-    cardBackground: GradientCardBackground(LinearGradient(
+final cardBackgrounds = [
+  SolidColorCardBackground(Colors.black.withOpacity(0.6)),
+  SolidColorCardBackground(kPink.withOpacity(0.2)),
+  SolidColorCardBackground(kRed.withOpacity(0.4)),
+  GradientCardBackground(
+    LinearGradient(
       begin: Alignment.centerLeft,
       end: Alignment.centerRight,
       colors: [kBlue, kPurple],
       stops: const [0.3, 0.95],
-    )),
-    cardNetworkType: CardNetworkType.mastercard,
-    cardHolderName: 'Very Very very boring devloper',
-    cardNumber: '4567',
-    company: CardCompany.sbiCard,
-    validity: Validity(
-      validThruMonth: 2,
-      validThruYear: 2021,
     ),
   ),
-  CreditCard(
-    cardBackground:
-        ImageCardBackground(const AssetImage('images/background_sample.png')),
-    cardNetworkType: CardNetworkType.mastercard,
-    cardHolderName: 'John Doe',
-    cardNumber: '2434 2434 **** ****',
-    company: CardCompany.virgin,
-    validity: Validity(
-      validThruMonth: 1,
-      validThruYear: 20,
-    ),
-  ),
+  ImageCardBackground(const AssetImage('images/background_sample.png')),
+  ImageCardBackground(const AssetImage('images/background_sample_1.png')),
+  ImageCardBackground(const AssetImage('images/background_sample_2.png')),
+  ImageCardBackground(const AssetImage('images/background_sample_3.png')),
+  ImageCardBackground(const AssetImage('images/background_sample_4.png')),
 ];
 
 class CardPage extends StatelessWidget {
-  const CardPage({Key? key}) : super(key: key);
+  CardPage({Key? key}) : super(key: key);
+
+  final controller = Get.put(CardController(CardRepository()));
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +49,36 @@ class CardPage extends StatelessWidget {
       index: PageIndex.card,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: CreditCardSlider(
-            creditCards,
-            repeatCards: RepeatCards.bothDirection,
-            onCardClicked: (index) {
-              debugPrint('Clicked at index: $index');
-            },
-          ),
+        child: controller.obx(
+          (state) {
+            final _creditCards = state
+                ?.map(
+                  (value) => CreditCard(
+                    cardBackground: cardBackgrounds[
+                        Random().nextInt(cardBackgrounds.length)],
+                    cardNetworkType: CardNetworkType.of(value.type!),
+                    cardHolderName: value.name,
+                    cardNumber: value.cardNumber,
+                    company: CardCompany.of(value.campany!),
+                    validity: Validity(
+                      validThruMonth: value.validity?.validThruMonth as int,
+                      validThruYear: value.validity?.validThruYear as int,
+                    ),
+                  ),
+                )
+                .toList() as List<CreditCard>;
+
+            return Center(
+              child: CreditCardSlider(
+                _creditCards,
+                repeatCards: RepeatCards.bothDirection,
+                onCardClicked: (index) {
+                  debugPrint('Clicked at index: $index');
+                },
+              ),
+            );
+          },
+          onError: ErrorHandler.onError,
         ),
       ),
     );
