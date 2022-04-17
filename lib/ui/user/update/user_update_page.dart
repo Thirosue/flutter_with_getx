@@ -28,7 +28,7 @@ class UserUpdatePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ユーザ更新'),
+        title: const Text('User Update'),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),

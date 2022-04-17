@@ -25,7 +25,7 @@ class UserPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(
-                    onTap: () async {
+                    onTap: () {
                       Get.to(
                         () => UserUpdatePage(),
                         arguments: state[index],

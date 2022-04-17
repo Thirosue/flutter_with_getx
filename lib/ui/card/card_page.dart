@@ -12,6 +12,7 @@ import 'package:flutter_with_getx/data/model/card/validity.dart';
 import 'package:flutter_with_getx/data/repository/card_repository.dart';
 import 'package:flutter_with_getx/helpers/error_handler.dart';
 import 'package:flutter_with_getx/ui/card/card_controller.dart';
+import 'package:flutter_with_getx/ui/card/detail/card_detail_page.dart';
 import 'package:get/get.dart';
 
 Color kPink = const Color(0xFFEE4CBF);
@@ -74,6 +75,11 @@ class CardPage extends StatelessWidget {
                 repeatCards: RepeatCards.bothDirection,
                 onCardClicked: (index) {
                   debugPrint('Clicked at index: $index');
+                  Get.to(
+                    () => const CardDetailPage(),
+                    arguments: state![index],
+                    fullscreenDialog: true,
+                  );
                 },
               ),
             );
