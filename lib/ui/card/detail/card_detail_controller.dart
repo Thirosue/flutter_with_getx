@@ -35,4 +35,6 @@ class CardDetailController extends GetxController with StateMixin<void> {
       EasyLoading.dismiss();
     }
   }
+
+  Future<void> toggle(bool? toggle) async {}
 }

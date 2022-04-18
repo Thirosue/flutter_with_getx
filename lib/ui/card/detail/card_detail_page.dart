@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_with_getx/component/molecules/card/credit_card_widget.dart';
 import 'package:flutter_with_getx/component/molecules/dialog_actions.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
@@ -14,10 +16,44 @@ import 'package:get/get.dart';
 class CardDetailPage extends StatelessWidget {
   const CardDetailPage({Key? key}) : super(key: key);
 
+  Widget _label({required String label}) {
+    return Text(
+      label,
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 16.0,
+      ),
+    );
+  }
+
+  Widget _tableRow({required String label, required String value}) {
+    return Container(
+      margin: const EdgeInsets.all(10),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: _label(
+              label: label,
+            ),
+          ),
+          AutoSizeText(
+            value,
+            style: const TextStyle(
+              fontFamily: 'notosans',
+              fontSize: 14,
+              color: Colors.grey,
+            ),
+            minFontSize: 10,
+            maxLines: 1,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final dynamic card = Get.arguments;
-    final double deviceWidth = MediaQuery.of(context).size.width;
 
     final controller = Get.put(
       CardDetailController(
@@ -55,27 +91,44 @@ class CardDetailPage extends StatelessWidget {
                   height: 24,
                 ),
                 Container(
-                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
-                  child: Table(
-                    children: const <TableRow>[
-                      TableRow(
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                        ),
-                        children: <Widget>[
-                          Text('name'),
-                          Text('Gursheesh Singh'),
+                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Table(
+                        children: <TableRow>[
+                          TableRow(
+                            children: <Widget>[
+                              _tableRow(
+                                label: '名前',
+                                value: 'Gursheesh Singh',
+                              )
+                            ],
+                          ),
+                          TableRow(
+                            children: <Widget>[
+                              _tableRow(
+                                label: 'カード番号',
+                                value: '2434 2434 **** ****',
+                              )
+                            ],
+                          ),
+                          TableRow(
+                            children: <Widget>[
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: FormBuilderSwitch(
+                                  name: 'notice',
+                                  title: _label(label: '通知'),
+                                  onChanged: controller.toggle,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                      TableRow(
-                        children: <Widget>[
-                          Text('number'),
-                          Text('2434 2434 **** ****'),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                    )),
               ],
             ),
           ),

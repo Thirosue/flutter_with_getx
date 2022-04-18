@@ -75,6 +75,9 @@ flutter:
     - family: creditcard
       fonts:
         - asset: fonts/creditcard.ttf
+    - family: notosans
+      fonts:
+        - asset: fonts/NotoSansJP-Regular.otf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
