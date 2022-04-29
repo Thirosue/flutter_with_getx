@@ -60,6 +60,10 @@ class Template extends StatelessWidget {
             },
           ),
         ),
+        flexibleSpace: Image.network(
+          'https://images.unsplash.com/photo-1513407030348-c983a97b98d8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80',
+          fit: BoxFit.cover,
+        ),
         backgroundColor: Theme.of(context).primaryColor.withOpacity(0.9),
         elevation: 0,
         title: Text(menuList[index].title),
@@ -69,13 +73,16 @@ class Template extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 130,
               child: DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
+                  image: DecorationImage(
+                    image: AssetImage('images/sample_drawer.jpeg'),
+                    fit: BoxFit.fill,
+                  ),
                 ),
-                child: const Text(
+                child: Text(
                   'Menu',
                   style: TextStyle(
                     color: Colors.white,
