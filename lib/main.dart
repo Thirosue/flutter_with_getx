@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_with_getx/component/templates/custom_theme.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/ui/card/card_page.dart';
 import 'package:flutter_with_getx/ui/index/index_page.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: dark ? ThemeData.dark() : ThemeData.light(),
+      theme: dark ? ThemeData.dark() : customTheme,
       localizationsDelegates: const [
         FormBuilderLocalizations.delegate,
       ],

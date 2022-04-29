@@ -66,13 +66,13 @@ class Template extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const SizedBox(
+            SizedBox(
               height: 130,
               child: DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Theme.of(context).primaryColor,
                 ),
-                child: Text(
+                child: const Text(
                   'Menu',
                   style: TextStyle(
                     color: Colors.white,
