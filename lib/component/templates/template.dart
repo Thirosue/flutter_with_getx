@@ -60,8 +60,11 @@ class Template extends StatelessWidget {
             },
           ),
         ),
+        backgroundColor: Theme.of(context).primaryColor.withOpacity(0.9),
+        elevation: 0,
         title: Text(menuList[index].title),
       ),
+      extendBodyBehindAppBar: true,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
