@@ -84,6 +84,7 @@ class CardPage extends StatelessWidget {
               ),
             );
           },
+          onLoading: const SizedBox.shrink(),
           onError: ErrorHandler.onError,
         ),
       ),

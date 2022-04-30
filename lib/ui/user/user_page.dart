@@ -40,6 +40,7 @@ class UserPage extends StatelessWidget {
               },
               separatorBuilder: (context, index) => const Divider(),
             ),
+            onLoading: const SizedBox.shrink(),
             onError: ErrorHandler.onError,
           ),
         ),

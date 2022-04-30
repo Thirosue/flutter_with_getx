@@ -23,6 +23,7 @@ class IndexPage extends StatelessWidget {
               );
             },
           ),
+          onLoading: const SizedBox.shrink(),
           onEmpty: const Text('no data'),
           onError: ((error) => Text(
                 error!,
