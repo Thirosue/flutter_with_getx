@@ -12,30 +12,35 @@ class Template extends StatelessWidget {
 
   static final List<Menu> menuList = [
     const Menu(
-        title: TitleLabel.index,
-        path: Path.index,
-        icon: Icons.home,
-        index: PageIndex.index),
+      title: TitleLabel.index,
+      path: Path.index,
+      icon: Icons.home,
+      index: PageIndex.index,
+    ),
     const Menu(
-        title: TitleLabel.qr,
-        path: Path.qr,
-        icon: Icons.qr_code,
-        index: PageIndex.qr),
+      title: TitleLabel.qr,
+      path: Path.qr,
+      icon: Icons.qr_code,
+      index: PageIndex.qr,
+    ),
     const Menu(
-        title: TitleLabel.user,
-        path: Path.user,
-        icon: Icons.person,
-        index: PageIndex.user),
+      title: TitleLabel.user,
+      path: Path.user,
+      icon: Icons.person,
+      index: PageIndex.user,
+    ),
     const Menu(
-        title: TitleLabel.card,
-        path: Path.card,
-        icon: Icons.card_membership,
-        index: PageIndex.card),
+      title: TitleLabel.card,
+      path: Path.card,
+      icon: Icons.card_membership,
+      index: PageIndex.card,
+    ),
     const Menu(
-        title: TitleLabel.settings,
-        path: Path.settings,
-        icon: Icons.settings,
-        index: PageIndex.settings),
+      title: TitleLabel.settings,
+      path: Path.settings,
+      icon: Icons.settings,
+      index: PageIndex.settings,
+    ),
   ];
 
   const Template({
@@ -68,7 +73,7 @@ class Template extends StatelessWidget {
         elevation: 0,
         title: Text(menuList[index].title),
       ),
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
