@@ -5,6 +5,12 @@ import 'package:get/get.dart';
 class QRPageController extends GetxController {
   String scannnedQrcode = '';
 
+  @override
+  void onInit() async {
+    super.onInit();
+    scanQr();
+  }
+
   Future<void> scanQr() async {
     try {
       scannnedQrcode = await FlutterBarcodeScanner.scanBarcode(
