@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: Path.login, page: () => LoginPage()),
         GetPage(name: Path.index, page: () => IndexPage()),
-        GetPage(name: Path.qr, page: () => const QrPage()),
+        GetPage(name: Path.qr, page: () => QrPage()),
         GetPage(name: Path.user, page: () => UserPage()),
         GetPage(name: Path.card, page: () => CardPage()),
         GetPage(name: Path.settings, page: () => const SettingPage()),
