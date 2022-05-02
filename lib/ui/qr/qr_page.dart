@@ -29,7 +29,7 @@ class QrPage extends StatelessWidget {
             ),
             _cardMenu(
               context: context,
-              onClick: () => debugPrint('barcode create'),
+              onClick: controller.showBarCodeView,
               icon: CupertinoIcons.barcode,
               label: 'Create BarCode',
             ),

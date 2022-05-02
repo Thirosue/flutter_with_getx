@@ -1,9 +1,12 @@
+import 'package:barcode/barcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:flutter_with_getx/ui/qr/barcode/barcode_page.dart';
 import 'package:get/get.dart';
 
 class QRPageController extends GetxController {
-  final scannnedQrcode = ''.obs;
+  String scannnedQrcode = 'sample code';
 
   @override
   void onInit() async {
@@ -13,17 +16,17 @@ class QRPageController extends GetxController {
 
   Future<void> scanQr() async {
     try {
-      scannnedQrcode.value = await FlutterBarcodeScanner.scanBarcode(
+      scannnedQrcode = await FlutterBarcodeScanner.scanBarcode(
         '#ff6666',
         'Cancel',
         false,
         ScanMode.QR,
       );
 
-      if (scannnedQrcode.value != "-1") {
+      if (scannnedQrcode != "-1") {
         Get.snackbar(
           'Result',
-          "QR Code:" + scannnedQrcode.value,
+          "QR Code:" + scannnedQrcode,
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.green,
           colorText: Colors.white,
@@ -32,5 +35,23 @@ class QRPageController extends GetxController {
     } catch (e) {
       debugPrint(e.toString());
     }
+  }
+
+  void showBarCodeView() {
+    final rawSvg = Barcode.code128(
+      useCode128A: false,
+      useCode128C: false,
+    ).toSvg(
+      scannnedQrcode,
+      width: 900,
+      height: 450,
+    );
+    final pictuire = SvgPicture.string(rawSvg);
+
+    Get.to(
+      () => const BarCodePage(),
+      arguments: pictuire,
+      fullscreenDialog: true,
+    );
   }
 }

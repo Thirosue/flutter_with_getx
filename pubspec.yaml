@@ -43,6 +43,8 @@ dependencies:
   form_builder_validators: ^8.0.0
   auto_size_text: ^3.0.0
   flutter_barcode_scanner: ^2.0.0
+  barcode: ^2.2.0
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
