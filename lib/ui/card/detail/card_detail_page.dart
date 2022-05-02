@@ -19,7 +19,7 @@ class CardDetailPage extends StatelessWidget {
       label,
       style: const TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 16.0,
+        fontSize: 14.0,
       ),
     );
   }
