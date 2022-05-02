@@ -8,6 +8,7 @@ class BarCodePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SvgPicture picture = Get.arguments;
+    final deviceHeight = MediaQuery.of(context).size.height / 1.6;
     final deviceWidth = MediaQuery.of(context).size.width / 1.2;
 
     return Scaffold(
@@ -17,11 +18,22 @@ class BarCodePage extends StatelessWidget {
       body: Center(
         child: GestureDetector(
           onTap: () {
-            debugPrint('show barcode modal');
+            final rotateBarcode = RotatedBox(
+              quarterTurns: 1,
+              child: SizedBox(
+                width: deviceHeight,
+                child: picture,
+              ),
+            );
+
+            Get.dialog(
+              AlertDialog(
+                content: rotateBarcode,
+              ),
+            );
           },
           child: SizedBox(
             width: deviceWidth,
-            height: deviceWidth / 2,
             child: picture,
           ),
         ),
