@@ -7,7 +7,7 @@ class BarCodePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SvgPicture picture = Get.arguments;
+    final SvgPicture barCode = Get.arguments;
     final deviceHeight = MediaQuery.of(context).size.height / 1.6;
     final deviceWidth = MediaQuery.of(context).size.width / 1.2;
 
@@ -22,7 +22,7 @@ class BarCodePage extends StatelessWidget {
               quarterTurns: 1,
               child: SizedBox(
                 width: deviceHeight,
-                child: picture,
+                child: barCode,
               ),
             );
 
@@ -34,7 +34,7 @@ class BarCodePage extends StatelessWidget {
           },
           child: SizedBox(
             width: deviceWidth,
-            child: picture,
+            child: barCode,
           ),
         ),
       ),

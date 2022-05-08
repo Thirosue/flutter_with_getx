@@ -46,11 +46,11 @@ class QRPageController extends GetxController {
       width: 900,
       height: 450,
     );
-    final pictuire = SvgPicture.string(rawSvg);
+    final barCode = SvgPicture.string(rawSvg);
 
     Get.to(
       () => const BarCodePage(),
-      arguments: pictuire,
+      arguments: barCode,
       fullscreenDialog: true,
     );
   }
