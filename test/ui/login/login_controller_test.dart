@@ -16,7 +16,7 @@ void main() async {
   group('LoginController auth() ', () {
     test('認証APIが正常終了するとき、APIが呼び出され、認証が正常終了すること', () async {
       // given
-      when(mock.auth(email: 'test@test.com', password: 'password'))
+      when(mock.auth(email: '', password: ''))
           .thenAnswer((_) => Future.value(response));
       var model = LoginController(mock);
 
@@ -24,19 +24,19 @@ void main() async {
       model.login();
 
       // then
-      verify(mock.auth(email: 'test@test.com', password: 'password')).called(1);
+      verify(mock.auth(email: '', password: '')).called(1);
     });
 
     test('認証APIが異常終了するとき、例外がthrowされること', () async {
       // given
-      when(mock.auth(email: 'test@test.com', password: 'password')).thenThrow(
+      when(mock.auth(email: '', password: '')).thenThrow(
         Exception('api error occurred'),
       );
       var model = LoginController(mock);
 
       // when / then
       expect(() => model.login(), throwsException);
-      verify(mock.auth(email: 'test@test.com', password: 'password')).called(1);
+      verify(mock.auth(email: '', password: '')).called(1);
     });
   });
 
