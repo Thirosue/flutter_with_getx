@@ -1,0 +1,4 @@
+{
+    // 使用するFlutter SDKのパスを指定。
+    "dart.flutterSdkPath": ".fvm/flutter_sdk",
+}

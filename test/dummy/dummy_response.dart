@@ -35,7 +35,7 @@ class DummyResponse {
       // read file sample
       json = await File('${Directory.current.path}/test/dummy/auth.post.json')
           .readAsString();
-    } on Exception catch (e) {
+    } on Exception {
       json = dummy;
     }
     return ApiResponse.fromJson(jsonDecode(json));
