@@ -50,3 +50,9 @@ $ fvm flutter run
 ```bash
 $ fvm flutter test
 ```
+
+## analyze code
+
+```bash
+$ fvm flutter analyze
+```
