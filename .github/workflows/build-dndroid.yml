@@ -22,5 +22,5 @@ jobs:
     - run: fvm install
     - run: fvm flutter pub get
     - run: fvm flutter test
-    - run: fvm flutter build apk
-    - run: fvm flutter build appbundle
+    - run: fvm flutter build apk --flavor production
+    - run: fvm flutter build appbundle --flavor production
