@@ -2,6 +2,9 @@
 
 A new Flutter project.
 
+![ios build](https://github.com/Thirosue/flutter_with_getx/actions/workflows/build-ios.yml/badge.svg)
+![android build](https://github.com/Thirosue/flutter_with_getx/actions/workflows/build-dndroid.yml/badge.svg)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
