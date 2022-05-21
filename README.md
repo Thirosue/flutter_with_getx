@@ -56,3 +56,19 @@ $ fvm flutter test
 ```bash
 $ fvm flutter analyze
 ```
+
+## Build
+
+### Android
+
+* Android Application Package
+
+```bash
+$ fvm flutter build apk --flavor production
+```
+
+* Android App Bundle
+
+```bash
+$ fvm flutter build appbundle --flavor production
+```
