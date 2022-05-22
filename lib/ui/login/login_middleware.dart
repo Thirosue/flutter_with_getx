@@ -47,7 +47,7 @@ class LoginMiddleWare extends GetMiddleware {
           debugPrint('token refreshed... go to index page.');
 
           // auto login
-          Get.toNamed(route!);
+          // Get.toNamed(route!);
           if (!Get.isSnackbarOpen) {
             Get.snackbar(
               'Login',

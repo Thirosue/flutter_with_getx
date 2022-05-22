@@ -4,8 +4,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_with_getx/component/templates/custom_theme.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
+import 'package:flutter_with_getx/data/repository/auth_repository.dart';
 import 'package:flutter_with_getx/ui/card/card_page.dart';
 import 'package:flutter_with_getx/ui/index/index_page.dart';
+import 'package:flutter_with_getx/ui/login/login_middleware.dart';
 import 'package:flutter_with_getx/ui/login/login_page.dart';
 import 'package:flutter_with_getx/ui/qr/qr_page.dart';
 import 'package:flutter_with_getx/ui/settings/setting_page.dart';
@@ -31,6 +33,12 @@ class MyApp extends StatelessWidget {
     final dark =
         SchedulerBinding.instance?.window.platformBrightness == Brightness.dark;
     debugPrint('darkmode: $dark');
+
+    // redirect settings
+    final loginMiddleWare = LoginMiddleWare(
+      auth: AuthRepository(),
+    );
+    loginMiddleWare.redirect(Path.index);
 
     return GetMaterialApp(
       title: 'Flutter Demo',

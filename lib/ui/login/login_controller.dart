@@ -10,7 +10,7 @@ enum FormStatus { idle, loading, error, success }
 
 class LoginController extends GetxController {
   final AuthRepository authRepository;
-  final Box<LocalState> localState;
+  final Box localState;
   final message = ''.obs;
   final status = (FormStatus.idle).obs;
   final showPassword = false.obs;

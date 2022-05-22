@@ -1,16 +1,31 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
 import 'package:flutter_with_getx/ui/login/login_controller.dart';
 import 'package:get/state_manager.dart';
+import 'package:hive/hive.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../dummy/dummy_response.dart';
 import 'login_controller_test.mocks.dart';
 
-@GenerateMocks([AuthRepository])
+var token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+var state = LocalState(
+  name: 'john doe',
+  idToken: token,
+  refreshToken: token,
+  accessToken: token,
+);
+
+@GenerateMocks([
+  AuthRepository,
+  Box,
+])
 void main() async {
   final mock = MockAuthRepository();
+  final bMock = MockBox();
   final response = await DummyResponse.getAuthPostResponse();
 
   group('LoginController auth() ', () {
@@ -18,7 +33,11 @@ void main() async {
       // given
       when(mock.auth(email: '', password: ''))
           .thenAnswer((_) => Future.value(response));
-      var model = LoginController(mock);
+      when(bMock.add(state)).thenAnswer((_) => Future.value(1));
+      var model = LoginController(
+        mock,
+        bMock,
+      );
 
       // when
       model.login();
@@ -32,7 +51,10 @@ void main() async {
       when(mock.auth(email: '', password: '')).thenThrow(
         Exception('api error occurred'),
       );
-      var model = LoginController(mock);
+      var model = LoginController(
+        mock,
+        bMock,
+      );
 
       // when / then
       expect(() => model.login(), throwsException);
@@ -42,6 +64,7 @@ void main() async {
 
   final target = LoginController(
     MockAuthRepository(),
+    MockBox<LocalState>(),
   );
 
   group('LoginController togglePasswordVisible() ', () {
