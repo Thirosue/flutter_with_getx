@@ -104,10 +104,7 @@ class Template extends StatelessWidget {
           ],
         ),
       ),
-      body: ValueListenableBuilder(
-        valueListenable: Hive.box<LocalState>('state').listenable(),
-        builder: (context, box, _) => child,
-      ),
+      body: child,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         selectedItemColor: Colors.redAccent,
