@@ -23,11 +23,11 @@ class _$LocalStateTearOff {
   const _$LocalStateTearOff();
 
   _LocalState call(
-      {required String name,
-      List<String>? roles,
-      String? idToken,
-      String? refreshToken,
-      String? accessToken}) {
+      {@HiveField(0) required String name,
+      @HiveField(1) List<String>? roles,
+      @HiveField(2) String? idToken,
+      @HiveField(3) String? refreshToken,
+      @HiveField(4) String? accessToken}) {
     return _LocalState(
       name: name,
       roles: roles,
@@ -47,10 +47,15 @@ const $LocalState = _$LocalStateTearOff();
 
 /// @nodoc
 mixin _$LocalState {
+  @HiveField(0)
   String get name => throw _privateConstructorUsedError;
+  @HiveField(1)
   List<String>? get roles => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get idToken => throw _privateConstructorUsedError;
+  @HiveField(3)
   String? get refreshToken => throw _privateConstructorUsedError;
+  @HiveField(4)
   String? get accessToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -65,11 +70,11 @@ abstract class $LocalStateCopyWith<$Res> {
           LocalState value, $Res Function(LocalState) then) =
       _$LocalStateCopyWithImpl<$Res>;
   $Res call(
-      {String name,
-      List<String>? roles,
-      String? idToken,
-      String? refreshToken,
-      String? accessToken});
+      {@HiveField(0) String name,
+      @HiveField(1) List<String>? roles,
+      @HiveField(2) String? idToken,
+      @HiveField(3) String? refreshToken,
+      @HiveField(4) String? accessToken});
 }
 
 /// @nodoc
@@ -120,11 +125,11 @@ abstract class _$LocalStateCopyWith<$Res> implements $LocalStateCopyWith<$Res> {
       __$LocalStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
-      List<String>? roles,
-      String? idToken,
-      String? refreshToken,
-      String? accessToken});
+      {@HiveField(0) String name,
+      @HiveField(1) List<String>? roles,
+      @HiveField(2) String? idToken,
+      @HiveField(3) String? refreshToken,
+      @HiveField(4) String? accessToken});
 }
 
 /// @nodoc
@@ -172,26 +177,32 @@ class __$LocalStateCopyWithImpl<$Res> extends _$LocalStateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 0, adapterName: 'LocalStateAdapter')
 class _$_LocalState with DiagnosticableTreeMixin implements _LocalState {
   const _$_LocalState(
-      {required this.name,
-      this.roles,
-      this.idToken,
-      this.refreshToken,
-      this.accessToken});
+      {@HiveField(0) required this.name,
+      @HiveField(1) this.roles,
+      @HiveField(2) this.idToken,
+      @HiveField(3) this.refreshToken,
+      @HiveField(4) this.accessToken});
 
   factory _$_LocalState.fromJson(Map<String, dynamic> json) =>
       _$$_LocalStateFromJson(json);
 
   @override
+  @HiveField(0)
   final String name;
   @override
+  @HiveField(1)
   final List<String>? roles;
   @override
+  @HiveField(2)
   final String? idToken;
   @override
+  @HiveField(3)
   final String? refreshToken;
   @override
+  @HiveField(4)
   final String? accessToken;
 
   @override
@@ -247,24 +258,29 @@ class _$_LocalState with DiagnosticableTreeMixin implements _LocalState {
 
 abstract class _LocalState implements LocalState {
   const factory _LocalState(
-      {required String name,
-      List<String>? roles,
-      String? idToken,
-      String? refreshToken,
-      String? accessToken}) = _$_LocalState;
+      {@HiveField(0) required String name,
+      @HiveField(1) List<String>? roles,
+      @HiveField(2) String? idToken,
+      @HiveField(3) String? refreshToken,
+      @HiveField(4) String? accessToken}) = _$_LocalState;
 
   factory _LocalState.fromJson(Map<String, dynamic> json) =
       _$_LocalState.fromJson;
 
   @override
+  @HiveField(0)
   String get name;
   @override
+  @HiveField(1)
   List<String>? get roles;
   @override
+  @HiveField(2)
   String? get idToken;
   @override
+  @HiveField(3)
   String? get refreshToken;
   @override
+  @HiveField(4)
   String? get accessToken;
   @override
   @JsonKey(ignore: true)

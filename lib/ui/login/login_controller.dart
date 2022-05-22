@@ -4,6 +4,7 @@ import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
 import 'package:flutter_with_getx/helpers/wait.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 enum FormStatus { idle, loading, error, success }
 
@@ -45,7 +46,8 @@ class LoginController extends GetxController {
       refreshToken: session.refreshToken,
       accessToken: session.accessToken,
     );
-
+    Hive.box<LocalState>('state').add(state);
+    // final hoge = Hive.box<LocalState>('state').getAt(0);
     debugPrint(state.toString());
 
     message.value = 'OK. Loading screen...';
