@@ -10,6 +10,7 @@ enum FormStatus { idle, loading, error, success }
 
 class LoginController extends GetxController {
   final AuthRepository authRepository;
+  final Box<LocalState> localState;
   final message = ''.obs;
   final status = (FormStatus.idle).obs;
   final showPassword = false.obs;
@@ -17,7 +18,7 @@ class LoginController extends GetxController {
   final email = ''.obs;
   final password = ''.obs;
 
-  LoginController(this.authRepository);
+  LoginController(this.authRepository, this.localState);
 
   @override
   void onInit() {
@@ -46,7 +47,7 @@ class LoginController extends GetxController {
       refreshToken: session.refreshToken,
       accessToken: session.accessToken,
     );
-    Hive.box<LocalState>('state').add(state);
+    localState.add(state);
     // final hoge = Hive.box<LocalState>('state').getAt(0);
     debugPrint(state.toString());
 
