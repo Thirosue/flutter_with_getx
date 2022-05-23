@@ -65,5 +65,7 @@ class LoginMiddleWare extends GetMiddleware {
 
       return null;
     }
+
+    return null;
   }
 }
