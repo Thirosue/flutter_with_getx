@@ -60,6 +60,12 @@ $ fvm flutter test
 $ fvm flutter analyze
 ```
 
+## Code Generate
+
+```
+$ fvm flutter pub run build_runner build --delete-conflicting-outputs
+```
+
 ## Build
 
 ### Android
