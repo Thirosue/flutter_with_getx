@@ -5,6 +5,7 @@ import 'package:flutter_with_getx/component/templates/custom_theme.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
+import 'package:flutter_with_getx/data/repository/state_repository.dart';
 import 'package:flutter_with_getx/ui/card/card_page.dart';
 import 'package:flutter_with_getx/ui/index/index_page.dart';
 import 'package:flutter_with_getx/ui/login/login_middleware.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
     // redirect settings
     final loginMiddleWare = LoginMiddleWare(
       auth: AuthRepository(),
+      state: StateRepository(),
     );
     loginMiddleWare.redirect(Path.index);
 

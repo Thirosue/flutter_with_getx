@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/model/response/session.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
+import 'package:flutter_with_getx/data/repository/state_repository.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 class LoginMiddleWare extends GetMiddleware {
   final AuthRepository auth;
+  final StateRepository state;
 
   LoginMiddleWare({
     required this.auth,
+    required this.state,
   });
 
   Future<bool> refreshToken() async {
@@ -17,13 +20,13 @@ class LoginMiddleWare extends GetMiddleware {
       final results = await auth.refresh();
       final session = Session.toList(results.data!).first;
 
-      final state = LocalState(
+      final value = LocalState(
         name: '${session.firstName} ${session.lastName}',
         idToken: session.idToken,
         refreshToken: session.refreshToken,
         accessToken: session.accessToken,
       );
-      Hive.box<LocalState>('state').add(state);
+      state.write(value);
 
       return true;
     } on Exception catch (e) {
