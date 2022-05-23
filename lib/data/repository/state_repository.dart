@@ -1,31 +1,21 @@
-// import 'dart:async';
-// import 'dart:convert';
+import 'package:flutter_with_getx/data/model/local_state.dart';
+import 'package:hive/hive.dart';
 
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-// import 'package:flutter_with_getx/data/model/local_state.dart';
+import '../model/local_state.dart';
 
-// import '../model/local_state.dart';
+class StateRepository {
+  LocalState read(String key) {
+    final state = Hive.box<LocalState>('state').getAt(0);
+    if (state != null) {
+      return state;
+    } else {
+      return const LocalState(
+        name: 'unknown',
+      );
+    }
+  }
 
-// enum StateKey { session }
-
-// class StateRepository {
-//   final storage = const FlutterSecureStorage();
-
-//   Future<LocalState> read(String key) async {
-//     var json = await storage.read(key: key);
-//     if (json != null) {
-//       return LocalState.fromJson(jsonDecode(json));
-//     } else {
-//       return const LocalState(
-//         name: 'unknown',
-//       );
-//     }
-//   }
-
-//   void write(String key, LocalState values) async {
-//     await storage.write(
-//       key: key,
-//       value: jsonEncode(values),
-//     );
-//   }
-// }
+  void write(LocalState value) {
+    Hive.box<LocalState>('state').add(value);
+  }
+}

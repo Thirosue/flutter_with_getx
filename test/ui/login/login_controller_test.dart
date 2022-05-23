@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
+import 'package:flutter_with_getx/data/repository/state_repository.dart';
 import 'package:flutter_with_getx/ui/login/login_controller.dart';
 import 'package:get/state_manager.dart';
-import 'package:hive/hive.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -21,11 +21,11 @@ var state = LocalState(
 
 @GenerateMocks([
   AuthRepository,
-  Box,
+  StateRepository,
 ])
 void main() async {
   final mock = MockAuthRepository();
-  final bMock = MockBox();
+  final stateMock = MockStateRepository();
   final response = await DummyResponse.getAuthPostResponse();
 
   group('LoginController auth() ', () {
@@ -33,10 +33,10 @@ void main() async {
       // given
       when(mock.auth(email: '', password: ''))
           .thenAnswer((_) => Future.value(response));
-      when(bMock.add(state)).thenAnswer((_) => Future.value(1));
+      when(stateMock.write(state)).thenAnswer((_) => Future.value(1));
       var model = LoginController(
         mock,
-        bMock,
+        stateMock,
       );
 
       // when
@@ -53,7 +53,7 @@ void main() async {
       );
       var model = LoginController(
         mock,
-        bMock,
+        stateMock,
       );
 
       // when / then
@@ -64,7 +64,7 @@ void main() async {
 
   final target = LoginController(
     MockAuthRepository(),
-    MockBox<LocalState>(),
+    MockStateRepository(),
   );
 
   group('LoginController togglePasswordVisible() ', () {

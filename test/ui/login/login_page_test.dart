@@ -3,16 +3,16 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
+import 'package:flutter_with_getx/data/repository/state_repository.dart';
 import 'package:flutter_with_getx/ui/login/login_controller.dart';
 import 'package:flutter_with_getx/ui/login/login_page.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../dummy/dummy_response.dart';
 import '../utils/editable_text_utils.dart' show findRenderEditable;
-import 'login_page_test.mocks.dart';
+import 'login_controller_test.mocks.dart';
 
 var token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
@@ -25,11 +25,11 @@ var state = LocalState(
 
 @GenerateMocks([
   AuthRepository,
-  Box,
+  StateRepository,
 ])
 void main() async {
   final mock = MockAuthRepository();
-  final bMock = MockBox();
+  final stateMock = MockStateRepository();
   final response = await DummyResponse.getAuthPostResponse();
 
   GetMaterialApp loginApp() {
@@ -42,7 +42,7 @@ void main() async {
     Get.testMode = true;
     Get.put(LoginController(
       mock,
-      bMock,
+      stateMock,
     ));
   });
 
@@ -144,7 +144,7 @@ void main() async {
       // given
       when(mock.auth(email: 'test@test.com', password: 'password'))
           .thenAnswer((_) => Future.value(response));
-      when(bMock.add(state)).thenAnswer((_) => Future.value(1));
+      when(stateMock.write(state)).thenAnswer((_) => Future.value(1));
 
       await tester.pumpWidget(loginApp());
       await tester.enterText(_password, 'password');

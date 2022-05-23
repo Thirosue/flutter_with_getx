@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_with_getx/data/const/validate_messages.dart';
-import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
+import 'package:flutter_with_getx/data/repository/state_repository.dart';
 import 'package:flutter_with_getx/ui/login/login_controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class LoginPage extends StatelessWidget {
 
   final controller = Get.put(LoginController(
     AuthRepository(),
-    Hive.box<LocalState>('state'),
+    StateRepository(),
   ));
 
   @override
