@@ -12,7 +12,7 @@ class SettingController extends GetxController {
 
   void changeTheme(bool? toggle) {
     Get.changeTheme(
-      Get.isDarkMode ? customTheme : ThemeData.dark(),
+      Get.isDarkMode ? lightTheme : darkTheme,
     );
     on.value = toggle!;
   }

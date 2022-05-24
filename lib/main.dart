@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: dark ? ThemeData.dark() : customTheme,
+      theme: dark ? darkTheme : lightTheme,
       localizationsDelegates: const [
         FormBuilderLocalizations.delegate,
       ],

@@ -107,8 +107,8 @@ class Template extends StatelessWidget {
       body: child,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
-        selectedItemColor: Colors.redAccent,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Theme.of(context).colorScheme.tertiary,
+        unselectedItemColor: Theme.of(context).unselectedWidgetColor,
         showUnselectedLabels: true,
         onTap: move,
         items: menuList
