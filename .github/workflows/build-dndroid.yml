@@ -22,6 +22,11 @@ jobs:
     - run: fvm install
     - run: fvm flutter pub get
 
+    - name: Restore Firebase Settings
+      run: echo -n ${{ secrets.LIB_FIREBASE_OPTIONS }} | base64 -d > lib/firebase_options.dart
+    - run: echo -n ${{ secrets.ANDROID_GOOGLE_SERVICES }} | base64 -d > android/app/google-services.json
+    - run: echo -n ${{ secrets.IOS_FIREBASE_APP_ID_FILE }} | base64 -d > ios/firebase_app_id_file.json
+
     # Secrets からrelease.jks を生成
     - name: Create release.jks
       run: echo -n ${{ secrets.ANDROID_KEY_JKS }} | base64 -d > "`pwd`/upload-keystore.jks"

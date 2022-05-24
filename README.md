@@ -66,6 +66,14 @@ $ fvm flutter analyze
 $ fvm flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
+## XCode
+
+### Open
+
+```
+$ open ios/Runner.xcodeproj 
+```
+
 ## Build
 
 ### Android

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
 import 'package:flutter_with_getx/data/repository/state_repository.dart';
+import 'package:flutter_with_getx/firebase_options.dart';
 import 'package:flutter_with_getx/ui/card/card_page.dart';
 import 'package:flutter_with_getx/ui/index/index_page.dart';
 import 'package:flutter_with_getx/ui/login/login_middleware.dart';
@@ -21,6 +23,10 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(LocalStateAdapter());
   await Hive.openBox<LocalState>('state');
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(const MyApp());
 }
