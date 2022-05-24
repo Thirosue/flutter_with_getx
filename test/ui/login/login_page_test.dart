@@ -144,7 +144,7 @@ void main() async {
       // given
       when(mock.auth(email: 'test@test.com', password: 'password'))
           .thenAnswer((_) => Future.value(response));
-      when(stateMock.write(state)).thenAnswer((_) => Future.value(1));
+      when(stateMock.write(state)).thenReturn(null);
 
       await tester.pumpWidget(loginApp());
       await tester.enterText(_password, 'password');

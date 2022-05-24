@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 import '../model/local_state.dart';
 
 class StateRepository {
-  LocalState read(String key) {
+  LocalState read() {
     final state = Hive.box<LocalState>('state').getAt(0);
     if (state != null) {
       return state;

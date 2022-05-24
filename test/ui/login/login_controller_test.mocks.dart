@@ -55,9 +55,8 @@ class MockStateRepository extends _i1.Mock implements _i6.StateRepository {
   }
 
   @override
-  _i3.LocalState read(String? key) =>
-      (super.noSuchMethod(Invocation.method(#read, [key]),
-          returnValue: _FakeLocalState_1()) as _i3.LocalState);
+  _i3.LocalState read() => (super.noSuchMethod(Invocation.method(#read, []),
+      returnValue: _FakeLocalState_1()) as _i3.LocalState);
   @override
   void write(_i3.LocalState? value) =>
       super.noSuchMethod(Invocation.method(#write, [value]),

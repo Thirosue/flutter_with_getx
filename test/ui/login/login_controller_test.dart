@@ -33,7 +33,7 @@ void main() async {
       // given
       when(mock.auth(email: '', password: ''))
           .thenAnswer((_) => Future.value(response));
-      when(stateMock.write(state)).thenAnswer((_) => Future.value(1));
+      when(stateMock.write(state)).thenReturn(null);
       var model = LoginController(
         mock,
         stateMock,
