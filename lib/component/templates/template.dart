@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_with_getx/component/atoms/drawer_item.dart';
 import 'package:flutter_with_getx/data/const/page_index.dart';
 import 'package:flutter_with_getx/data/const/title_label.dart';
-import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/model/menu.dart';
 import 'package:get/get.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class Template extends StatelessWidget {
   final int index;
