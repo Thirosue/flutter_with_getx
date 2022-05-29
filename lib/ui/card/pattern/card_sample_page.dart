@@ -18,12 +18,17 @@ class CardSamplePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const width = 150.0;
+    const height = 225.0;
+    final deviceHeight = MediaQuery.of(context).size.height;
+    final deviceWidth = MediaQuery.of(context).size.width;
+
     List _imageList = [
       Positioned(
-        top: 10.0,
-        left: 10.0,
-        width: 200.0,
-        height: 300.0,
+        top: (deviceHeight / 2),
+        left: deviceWidth / 20,
+        width: width,
+        height: height,
         child: Transform.rotate(
           angle: -30 * pi / 180,
           child: CreditCard(
@@ -32,10 +37,10 @@ class CardSamplePage extends StatelessWidget {
         ),
       ),
       Positioned(
-        top: 10.0,
-        left: 10.0,
-        width: 200.0,
-        height: 300.0,
+        top: (deviceHeight / 2),
+        left: deviceWidth / 20,
+        width: width,
+        height: height,
         child: Transform.rotate(
           angle: -20 * pi / 180,
           child: CreditCard(
@@ -44,10 +49,10 @@ class CardSamplePage extends StatelessWidget {
         ),
       ),
       Positioned(
-        top: 10.0,
-        left: 10.0,
-        width: 200.0,
-        height: 300.0,
+        top: (deviceHeight / 2),
+        left: deviceWidth / 20,
+        width: width,
+        height: height,
         child: Transform.rotate(
           angle: -10 * pi / 180,
           child: CreditCard(
@@ -56,10 +61,10 @@ class CardSamplePage extends StatelessWidget {
         ),
       ),
       Positioned(
-        top: 10.0,
-        left: 10.0,
-        width: 200.0,
-        height: 300.0,
+        top: (deviceHeight / 2) - 150,
+        left: (deviceWidth - width) / 2,
+        width: width,
+        height: height,
         child: Transform.rotate(
           angle: 0 * pi / 180,
           child: CreditCard(
@@ -68,10 +73,10 @@ class CardSamplePage extends StatelessWidget {
         ),
       ),
       Positioned(
-        top: 10.0,
-        left: 10.0,
-        width: 200.0,
-        height: 300.0,
+        top: (deviceHeight / 2),
+        left: deviceWidth / 2 + deviceWidth / 7,
+        width: width,
+        height: height,
         child: Transform.rotate(
           angle: 10 * pi / 180,
           child: CreditCard(
@@ -80,10 +85,10 @@ class CardSamplePage extends StatelessWidget {
         ),
       ),
       Positioned(
-        top: 10.0,
-        left: 10.0,
-        width: 200.0,
-        height: 300.0,
+        top: deviceHeight / 2,
+        left: deviceWidth / 2 + deviceWidth / 7,
+        width: width,
+        height: height,
         child: Transform.rotate(
           angle: 20 * pi / 180,
           child: CreditCard(
@@ -93,18 +98,15 @@ class CardSamplePage extends StatelessWidget {
       ),
     ];
 
-    return Padding(
-      padding: const EdgeInsets.all(30),
-      child: Stack(
-        children: [
-          _imageList[0],
-          _imageList[1],
-          _imageList[2],
-          _imageList[3],
-          _imageList[4],
-          _imageList[5],
-        ],
-      ),
+    return Stack(
+      children: [
+        _imageList[0],
+        _imageList[1],
+        _imageList[2],
+        _imageList[3],
+        _imageList[4],
+        _imageList[5],
+      ],
     );
   }
 }
