@@ -9,6 +9,7 @@ import 'package:flutter_with_getx/data/repository/auth_repository.dart';
 import 'package:flutter_with_getx/data/repository/state_repository.dart';
 import 'package:flutter_with_getx/firebase_options.dart';
 import 'package:flutter_with_getx/ui/card/card_page.dart';
+import 'package:flutter_with_getx/ui/card/pattern/card_sample_page.dart';
 import 'package:flutter_with_getx/ui/index/index_page.dart';
 import 'package:flutter_with_getx/ui/login/login_middleware.dart';
 import 'package:flutter_with_getx/ui/login/login_page.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: const [
         FormBuilderLocalizations.delegate,
       ],
-      initialRoute: Path.login,
+      initialRoute: Path.index,
       getPages: [
         GetPage(name: Path.login, page: () => LoginPage()),
         GetPage(name: Path.index, page: () => IndexPage()),
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: Path.user, page: () => UserPage()),
         GetPage(name: Path.card, page: () => CardPage()),
         GetPage(name: Path.settings, page: () => const SettingPage()),
+        GetPage(name: Path.cardsample, page: () => const CardSamplePage()),
       ],
       builder: EasyLoading.init(),
     );
