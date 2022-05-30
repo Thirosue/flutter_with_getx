@@ -13,8 +13,31 @@ final cardBackgrounds = [
   SolidColorCardBackground(Colors.orange.withOpacity(0.8)),
 ];
 
-class CardSamplePage extends StatelessWidget {
+class CardSamplePage extends StatefulWidget {
   const CardSamplePage({Key? key}) : super(key: key);
+
+  @override
+  State<CardSamplePage> createState() => _CardSampleState();
+}
+
+class _CardSampleState extends State<CardSamplePage> {
+  List _cards = [
+    CreditCard(
+      cardBackground: cardBackgrounds[0],
+    ),
+    CreditCard(
+      cardBackground: cardBackgrounds[1],
+    ),
+    CreditCard(
+      cardBackground: cardBackgrounds[2],
+    ),
+    CreditCard(
+      cardBackground: cardBackgrounds[3],
+    ),
+    CreditCard(
+      cardBackground: cardBackgrounds[4],
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -23,90 +46,88 @@ class CardSamplePage extends StatelessWidget {
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
 
-    List _imageList = [
-      Positioned(
-        top: (deviceHeight / 2),
-        left: deviceWidth / 20,
-        width: width,
-        height: height,
-        child: Transform.rotate(
-          angle: -30 * pi / 180,
-          child: CreditCard(
-            cardBackground: cardBackgrounds[0],
-          ),
-        ),
-      ),
-      Positioned(
-        top: (deviceHeight / 2),
-        left: deviceWidth / 20,
-        width: width,
-        height: height,
-        child: Transform.rotate(
-          angle: -20 * pi / 180,
-          child: CreditCard(
-            cardBackground: cardBackgrounds[1],
-          ),
-        ),
-      ),
-      Positioned(
-        top: (deviceHeight / 2),
-        left: deviceWidth / 20,
-        width: width,
-        height: height,
-        child: Transform.rotate(
-          angle: -10 * pi / 180,
-          child: CreditCard(
-            cardBackground: cardBackgrounds[2],
-          ),
-        ),
-      ),
-      Positioned(
-        top: (deviceHeight / 2) - 150,
-        left: (deviceWidth - width) / 2,
-        width: width,
-        height: height,
-        child: Transform.rotate(
-          angle: 0 * pi / 180,
-          child: CreditCard(
-            cardBackground: cardBackgrounds[3],
-          ),
-        ),
-      ),
-      Positioned(
-        top: (deviceHeight / 2),
-        left: deviceWidth / 2 + deviceWidth / 7,
-        width: width,
-        height: height,
-        child: Transform.rotate(
-          angle: 10 * pi / 180,
-          child: CreditCard(
-            cardBackground: cardBackgrounds[4],
-          ),
-        ),
-      ),
-      Positioned(
-        top: deviceHeight / 2,
-        left: deviceWidth / 2 + deviceWidth / 7,
-        width: width,
-        height: height,
-        child: Transform.rotate(
-          angle: 20 * pi / 180,
-          child: CreditCard(
-            cardBackground: cardBackgrounds[5],
-          ),
-        ),
-      ),
-    ];
+    List _rotate(List items) {
+      List tmpList = [];
+      tmpList.add(items[4]);
+      tmpList.add(items[0]);
+      tmpList.add(items[1]);
+      tmpList.add(items[2]);
+      tmpList.add(items[3]);
+      return tmpList;
+    }
 
-    return Stack(
-      children: [
-        _imageList[0],
-        _imageList[1],
-        _imageList[2],
-        _imageList[3],
-        _imageList[4],
-        _imageList[5],
-      ],
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          final shuffled = _rotate(_cards);
+          _cards = shuffled;
+        });
+      },
+      onHorizontalDragEnd: (details) {
+        if (details.primaryVelocity! > 0) {
+          debugPrint('右スワイプ');
+        }
+        if (details.primaryVelocity! < 0) {
+          debugPrint('左スワイプ');
+        }
+      },
+      child: AnimatedContainer(
+        duration: const Duration(seconds: 2),
+        child: Stack(
+          children: [
+            Positioned(
+              top: (deviceHeight / 2),
+              left: deviceWidth / 20,
+              width: width,
+              height: height,
+              child: Transform.rotate(
+                angle: -20 * pi / 180,
+                child: _cards[0],
+              ),
+            ),
+            Positioned(
+              top: (deviceHeight / 2),
+              left: deviceWidth / 20,
+              width: width,
+              height: height,
+              child: Transform.rotate(
+                angle: -10 * pi / 180,
+                child: _cards[1],
+              ),
+            ),
+            Positioned(
+              top: (deviceHeight / 2) - 150,
+              left: (deviceWidth - width) / 2,
+              width: width,
+              height: height,
+              child: Transform.rotate(
+                angle: 0 * pi / 180,
+                child: _cards[2],
+              ),
+            ),
+            Positioned(
+              top: (deviceHeight / 2),
+              left: deviceWidth / 2 + deviceWidth / 7,
+              width: width,
+              height: height,
+              child: Transform.rotate(
+                angle: 10 * pi / 180,
+                child: _cards[3],
+              ),
+            ),
+            Positioned(
+              top: deviceHeight / 2,
+              left: deviceWidth / 2 + deviceWidth / 7,
+              width: width,
+              height: height,
+              child: Transform.rotate(
+                angle: 20 * pi / 180,
+                child: _cards[4],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
