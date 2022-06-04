@@ -41,26 +41,24 @@ class _CardSampleState extends State<CardSamplePage2> {
 
   @override
   Widget build(BuildContext context) {
-    const width = 100.0;
-    const height = 150.0;
+    const width = 200.0;
+    const height = 250.0;
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
 
-    List _rotate(List items) {
-      List tmpList = [];
-      tmpList.add(items[4]);
-      tmpList.add(items[0]);
-      tmpList.add(items[1]);
-      tmpList.add(items[2]);
-      tmpList.add(items[3]);
-      return tmpList;
-    }
+    final left = deviceWidth / 2 - width / 2;
 
     return GestureDetector(
       onTap: () {
         setState(() {
-          final shuffled = _rotate(_cards);
-          _cards = shuffled;
+          _cards = [
+            CreditCard(
+              cardBackground: cardBackgrounds[0],
+            ),
+            CreditCard(
+              cardBackground: cardBackgrounds[1],
+            ),
+          ];
         });
       },
       onHorizontalDragEnd: (details) {
@@ -72,42 +70,42 @@ class _CardSampleState extends State<CardSamplePage2> {
         }
       },
       child: AnimatedContainer(
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 1),
         child: Stack(
           children: [
             Positioned(
-              top: deviceHeight / 2 + 60,
-              left: deviceWidth / 2 - 150 - width / 2,
+              top: deviceHeight / 2 + 40,
+              left: left - 70,
               width: width,
               height: height,
               child: Transform.rotate(
-                angle: -50 * pi / 180,
+                angle: -20 * pi / 180,
                 child: _cards[0],
               ),
             ),
             Positioned(
-              top: deviceHeight / 2 + 40,
-              left: deviceWidth / 2 - 120 - width / 2,
+              top: deviceHeight / 2 + 20,
+              left: left - 60,
               width: width,
               height: height,
               child: Transform.rotate(
-                angle: -40 * pi / 180,
+                angle: -20 * pi / 180,
                 child: _cards[1],
               ),
             ),
             Positioned(
-              top: deviceHeight / 2 + 20,
-              left: deviceWidth / 2 - 90 - width / 2,
+              top: deviceHeight / 2,
+              left: left - 50,
               width: width,
               height: height,
               child: Transform.rotate(
-                angle: -30 * pi / 180,
+                angle: -20 * pi / 180,
                 child: _cards[2],
               ),
             ),
             Positioned(
-              top: deviceHeight / 2 + 15,
-              left: deviceWidth / 2 - 60 - width / 2,
+              top: deviceHeight / 2 - 20,
+              left: left - 40,
               width: width,
               height: height,
               child: Transform.rotate(
@@ -116,28 +114,25 @@ class _CardSampleState extends State<CardSamplePage2> {
               ),
             ),
             Positioned(
-              top: deviceHeight / 2 + 10,
-              left: deviceWidth / 2 - 20 - width / 2,
+              top: deviceHeight / 2 - 200,
+              left: left,
               width: width,
               height: height,
-              child: Transform.rotate(
-                angle: -5 * pi / 180,
-                child: _cards[4],
-              ),
+              child: _cards[4],
             ),
             Positioned(
-              top: deviceHeight / 2 + 10,
-              left: deviceWidth / 2 + 20 - width / 2,
+              top: deviceHeight / 2 - 20,
+              left: left + 40,
               width: width,
               height: height,
               child: Transform.rotate(
-                angle: 5 * pi / 180,
+                angle: 20 * pi / 180,
                 child: _cards[0],
               ),
             ),
             Positioned(
-              top: deviceHeight / 2 + 15,
-              left: deviceWidth / 2 + 60 - width / 2,
+              top: deviceHeight / 2,
+              left: left + 50,
               width: width,
               height: height,
               child: Transform.rotate(
@@ -147,31 +142,31 @@ class _CardSampleState extends State<CardSamplePage2> {
             ),
             Positioned(
               top: deviceHeight / 2 + 20,
-              left: deviceWidth / 2 + 90 - width / 2,
+              left: left + 60,
               width: width,
               height: height,
               child: Transform.rotate(
-                angle: 30 * pi / 180,
+                angle: 20 * pi / 180,
                 child: _cards[2],
               ),
             ),
             Positioned(
               top: deviceHeight / 2 + 40,
-              left: deviceWidth / 2 + 120 - width / 2,
+              left: left + 70,
               width: width,
               height: height,
               child: Transform.rotate(
-                angle: 40 * pi / 180,
+                angle: 20 * pi / 180,
                 child: _cards[3],
               ),
             ),
             Positioned(
               top: deviceHeight / 2 + 60,
-              left: deviceWidth / 2 + 150 - width / 2,
+              left: left + 80,
               width: width,
               height: height,
               child: Transform.rotate(
-                angle: 50 * pi / 180,
+                angle: 20 * pi / 180,
                 child: _cards[4],
               ),
             ),
