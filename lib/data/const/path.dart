@@ -9,4 +9,5 @@ class Path {
   static const String card = '/card';
   static const String settings = '/settings';
   static const String cardsample = '/cardsample';
+  static const String cardsample2 = '/cardsample2';
 }
