@@ -21,173 +21,144 @@ class CardSamplePage2 extends StatefulWidget {
 }
 
 class _CardSampleState extends State<CardSamplePage2> {
-  List _cards = [
-    CreditCard(
-      cardBackground: cardBackgrounds[0],
-    ),
-    CreditCard(
-      cardBackground: cardBackgrounds[1],
-    ),
-    CreditCard(
-      cardBackground: cardBackgrounds[2],
-    ),
-    CreditCard(
-      cardBackground: cardBackgrounds[3],
-    ),
-    CreditCard(
-      cardBackground: cardBackgrounds[4],
-    ),
-  ];
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
-    const width = 200.0;
-    const height = 250.0;
-    final deviceHeight = MediaQuery.of(context).size.height;
-    final deviceWidth = MediaQuery.of(context).size.width;
-
-    final left = deviceWidth / 2 - width / 2;
-    final halfHeight = deviceHeight / 2;
-    const unitHeight = 20;
-
-    var _alignments = [
-      Alignment(halfHeight + unitHeight * 3, left - 70),
-      Alignment(halfHeight + unitHeight * 2, left - 60),
-      Alignment(halfHeight + unitHeight * 1, left - 50),
-      Alignment(halfHeight, left - 40),
-      Alignment(halfHeight - 200, left),
-      Alignment(halfHeight, left + 40),
-      Alignment(halfHeight + unitHeight * 1, left + 50),
-      Alignment(halfHeight + unitHeight * 2, left + 60),
-      Alignment(halfHeight + unitHeight * 3, left + 70),
-      Alignment(halfHeight + unitHeight * 4, left + 80),
+    const duration = Duration(milliseconds: 250);
+    const _alignments = [
+      Alignment(-2, 0.5),
+      Alignment(-1.5, 0.4),
+      Alignment(-1, 0.3),
+      Alignment(-0.5, 0.2),
+      Alignment(0, -0.5),
+      Alignment(0.5, 0.2),
+      Alignment(1, 0.3),
+      Alignment(1.5, 0.4),
+      Alignment(2, 0.5),
+      Alignment(2.5, 0.6),
     ];
 
-    List _rotate(List items) {
-      List tmpList = [];
-      tmpList.add(items[4]);
-      tmpList.add(items[0]);
-      tmpList.add(items[1]);
-      tmpList.add(items[2]);
-      tmpList.add(items[3]);
-      return tmpList;
+    void _onTap() => setState(() => ++index);
+
+    double _angle(int index) {
+      if (index % 10 < 4) {
+        return -110 * pi / 180;
+      } else if (index % 10 == 4) {
+        return 90 * pi / 180;
+      } else {
+        return 110 * pi / 180;
+      }
     }
 
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          final shuffled = _rotate(_cards);
-          _cards = shuffled;
-        });
-      },
-      onHorizontalDragEnd: (details) {
-        if (details.primaryVelocity! > 0) {
-          debugPrint('右スワイプ');
-        }
-        if (details.primaryVelocity! < 0) {
-          debugPrint('左スワイプ');
-        }
-      },
-      child: Stack(
+    return Scaffold(
+      body: Stack(
         children: [
-          Positioned(
-            top: _alignments[0].x,
-            left: _alignments[0].y,
-            width: width,
-            height: height,
+          AnimatedContainer(
+            duration: duration,
+            alignment: _alignments[index % 10],
             child: Transform.rotate(
-              angle: -20 * pi / 180,
-              child: _cards[0],
+              angle: _angle(index),
+              child: CreditCard(
+                cardBackground: cardBackgrounds[0],
+                cardNumber: (index % 10).toString(),
+              ),
             ),
           ),
-          Positioned(
-            top: _alignments[1].x,
-            left: _alignments[1].y,
-            width: width,
-            height: height,
+          AnimatedContainer(
+            duration: duration,
+            alignment: _alignments[(index + 1) % 10],
             child: Transform.rotate(
-              angle: -20 * pi / 180,
-              child: _cards[1],
+              angle: _angle(index + 1),
+              child: CreditCard(
+                cardBackground: cardBackgrounds[1],
+              ),
             ),
           ),
-          Positioned(
-            top: _alignments[2].x,
-            left: _alignments[2].y,
-            width: width,
-            height: height,
+          AnimatedContainer(
+            duration: duration,
+            alignment: _alignments[(index + 2) % 10],
             child: Transform.rotate(
-              angle: -20 * pi / 180,
-              child: _cards[2],
+              angle: _angle(index + 2),
+              child: CreditCard(
+                cardBackground: cardBackgrounds[2],
+              ),
             ),
           ),
-          Positioned(
-            top: _alignments[3].x,
-            left: _alignments[3].y,
-            width: width,
-            height: height,
+          AnimatedContainer(
+            duration: duration,
+            alignment: _alignments[(index + 3) % 10],
             child: Transform.rotate(
-              angle: -20 * pi / 180,
-              child: _cards[3],
+              angle: _angle(index + 3),
+              child: CreditCard(
+                cardBackground: cardBackgrounds[3],
+              ),
             ),
           ),
-          Positioned(
-            top: _alignments[5].x,
-            left: _alignments[5].y,
-            width: width,
-            height: height,
+          AnimatedContainer(
+            duration: duration,
+            alignment: _alignments[(index + 4) % 10],
             child: Transform.rotate(
-              angle: 20 * pi / 180,
-              child: _cards[0],
+              angle: _angle(index + 4),
+              child: CreditCard(
+                cardBackground: cardBackgrounds[4],
+              ),
             ),
           ),
-          Positioned(
-            top: _alignments[6].x,
-            left: _alignments[6].y,
-            width: width,
-            height: height,
+          AnimatedContainer(
+            duration: duration,
+            alignment: _alignments[(index + 5) % 10],
             child: Transform.rotate(
-              angle: 20 * pi / 180,
-              child: _cards[1],
+              angle: _angle(index + 5),
+              child: CreditCard(
+                cardBackground: cardBackgrounds[0],
+              ),
             ),
           ),
-          Positioned(
-            top: _alignments[7].x,
-            left: _alignments[7].y,
-            width: width,
-            height: height,
+          AnimatedContainer(
+            duration: duration,
+            alignment: _alignments[(index + 6) % 10],
             child: Transform.rotate(
-              angle: 20 * pi / 180,
-              child: _cards[2],
+              angle: _angle(index + 6),
+              child: CreditCard(
+                cardBackground: cardBackgrounds[1],
+              ),
             ),
           ),
-          Positioned(
-            top: _alignments[8].x,
-            left: _alignments[8].y,
-            width: width,
-            height: height,
+          AnimatedContainer(
+            duration: duration,
+            alignment: _alignments[(index + 7) % 10],
             child: Transform.rotate(
-              angle: 20 * pi / 180,
-              child: _cards[3],
+              angle: _angle(index + 7),
+              child: CreditCard(
+                cardBackground: cardBackgrounds[2],
+              ),
             ),
           ),
-          Positioned(
-            top: _alignments[9].x,
-            left: _alignments[9].y,
-            width: width,
-            height: height,
+          AnimatedContainer(
+            duration: duration,
+            alignment: _alignments[(index + 8) % 10],
             child: Transform.rotate(
-              angle: 20 * pi / 180,
-              child: _cards[4],
+              angle: _angle(index + 8),
+              child: CreditCard(
+                cardBackground: cardBackgrounds[3],
+              ),
             ),
           ),
-          Positioned(
-            top: _alignments[4].x,
-            left: _alignments[4].y,
-            width: width,
-            height: height,
-            child: _cards[4],
+          AnimatedContainer(
+            duration: duration,
+            alignment: _alignments[(index + 9) % 10],
+            child: Transform.rotate(
+              angle: _angle(index + 9),
+              child: CreditCard(
+                cardBackground: cardBackgrounds[4],
+              ),
+            ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _onTap,
       ),
     );
   }
