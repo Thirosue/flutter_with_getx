@@ -10,7 +10,11 @@ final cardBackgrounds = [
   SolidColorCardBackground(Colors.yellow.withOpacity(0.8)),
   SolidColorCardBackground(Colors.red.withOpacity(0.8)),
   SolidColorCardBackground(Colors.purple.withOpacity(0.8)),
-  SolidColorCardBackground(Colors.orange.withOpacity(0.8)),
+  SolidColorCardBackground(Colors.black.withOpacity(0.8)),
+  SolidColorCardBackground(Colors.blue.withOpacity(0.8)),
+  SolidColorCardBackground(Colors.yellow.withOpacity(0.8)),
+  SolidColorCardBackground(Colors.red.withOpacity(0.8)),
+  SolidColorCardBackground(Colors.purple.withOpacity(0.8)),
 ];
 
 class CardSamplePage2 extends StatefulWidget {
@@ -27,24 +31,24 @@ class _CardSampleState extends State<CardSamplePage2> {
   Widget build(BuildContext context) {
     const duration = Duration(milliseconds: 250);
     const _alignments = [
-      Alignment(-2, 0.5),
-      Alignment(-1.5, 0.4),
-      Alignment(-1, 0.3),
-      Alignment(-0.5, 0.2),
+      Alignment(-2, 0.3),
+      Alignment(-1.5, 0.25),
+      Alignment(-1, 0.2),
+      Alignment(-0.5, 0.15),
       Alignment(0, -0.5),
-      Alignment(0.5, 0.2),
-      Alignment(1, 0.3),
-      Alignment(1.5, 0.4),
-      Alignment(2, 0.5),
-      Alignment(2.5, 0.6),
+      Alignment(0.5, 0.15),
+      Alignment(1, 0.2),
+      Alignment(1.5, 0.25),
+      Alignment(2, 0.3),
+      Alignment(2.5, 0.35),
     ];
 
     void _onTap() => setState(() => ++index);
 
     double _angle(int index) {
-      if (index % 10 < 4) {
+      if (index < 4) {
         return -110 * pi / 180;
-      } else if (index % 10 == 4) {
+      } else if (index == 4) {
         return 90 * pi / 180;
       } else {
         return 110 * pi / 180;
@@ -58,7 +62,7 @@ class _CardSampleState extends State<CardSamplePage2> {
             duration: duration,
             alignment: _alignments[index % 10],
             child: Transform.rotate(
-              angle: _angle(index),
+              angle: _angle(index % 10),
               child: CreditCard(
                 cardBackground: cardBackgrounds[0],
                 cardNumber: (index % 10).toString(),
@@ -69,7 +73,7 @@ class _CardSampleState extends State<CardSamplePage2> {
             duration: duration,
             alignment: _alignments[(index + 1) % 10],
             child: Transform.rotate(
-              angle: _angle(index + 1),
+              angle: _angle((index + 1) % 10),
               child: CreditCard(
                 cardBackground: cardBackgrounds[1],
               ),
@@ -79,7 +83,7 @@ class _CardSampleState extends State<CardSamplePage2> {
             duration: duration,
             alignment: _alignments[(index + 2) % 10],
             child: Transform.rotate(
-              angle: _angle(index + 2),
+              angle: _angle((index + 2) % 10),
               child: CreditCard(
                 cardBackground: cardBackgrounds[2],
               ),
@@ -89,7 +93,7 @@ class _CardSampleState extends State<CardSamplePage2> {
             duration: duration,
             alignment: _alignments[(index + 3) % 10],
             child: Transform.rotate(
-              angle: _angle(index + 3),
+              angle: _angle((index + 3) % 10),
               child: CreditCard(
                 cardBackground: cardBackgrounds[3],
               ),
@@ -99,7 +103,7 @@ class _CardSampleState extends State<CardSamplePage2> {
             duration: duration,
             alignment: _alignments[(index + 4) % 10],
             child: Transform.rotate(
-              angle: _angle(index + 4),
+              angle: _angle((index + 4) % 10),
               child: CreditCard(
                 cardBackground: cardBackgrounds[4],
               ),
@@ -109,9 +113,9 @@ class _CardSampleState extends State<CardSamplePage2> {
             duration: duration,
             alignment: _alignments[(index + 5) % 10],
             child: Transform.rotate(
-              angle: _angle(index + 5),
+              angle: _angle((index + 5) % 10),
               child: CreditCard(
-                cardBackground: cardBackgrounds[0],
+                cardBackground: cardBackgrounds[5],
               ),
             ),
           ),
@@ -119,9 +123,9 @@ class _CardSampleState extends State<CardSamplePage2> {
             duration: duration,
             alignment: _alignments[(index + 6) % 10],
             child: Transform.rotate(
-              angle: _angle(index + 6),
+              angle: _angle((index + 6) % 10),
               child: CreditCard(
-                cardBackground: cardBackgrounds[1],
+                cardBackground: cardBackgrounds[6],
               ),
             ),
           ),
@@ -129,9 +133,9 @@ class _CardSampleState extends State<CardSamplePage2> {
             duration: duration,
             alignment: _alignments[(index + 7) % 10],
             child: Transform.rotate(
-              angle: _angle(index + 7),
+              angle: _angle((index + 7) % 10),
               child: CreditCard(
-                cardBackground: cardBackgrounds[2],
+                cardBackground: cardBackgrounds[7],
               ),
             ),
           ),
@@ -139,9 +143,9 @@ class _CardSampleState extends State<CardSamplePage2> {
             duration: duration,
             alignment: _alignments[(index + 8) % 10],
             child: Transform.rotate(
-              angle: _angle(index + 8),
+              angle: _angle((index + 8) % 10),
               child: CreditCard(
-                cardBackground: cardBackgrounds[3],
+                cardBackground: cardBackgrounds[8],
               ),
             ),
           ),
@@ -149,9 +153,9 @@ class _CardSampleState extends State<CardSamplePage2> {
             duration: duration,
             alignment: _alignments[(index + 9) % 10],
             child: Transform.rotate(
-              angle: _angle(index + 9),
+              angle: _angle((index + 9) % 10),
               child: CreditCard(
-                cardBackground: cardBackgrounds[4],
+                cardBackground: cardBackgrounds[9],
               ),
             ),
           ),
