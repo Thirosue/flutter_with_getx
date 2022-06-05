@@ -31,16 +31,16 @@ class _CardSampleState extends State<CardSamplePage2> {
   Widget build(BuildContext context) {
     const duration = Duration(milliseconds: 250);
     const _alignments = [
-      Alignment(-2, 0.3),
-      Alignment(-1.5, 0.25),
-      Alignment(-1, 0.2),
-      Alignment(-0.5, 0.15),
-      Alignment(0, -0.5),
-      Alignment(0.5, 0.15),
-      Alignment(1, 0.2),
-      Alignment(1.5, 0.25),
-      Alignment(2, 0.3),
-      Alignment(2.5, 0.35),
+      Alignment(-2, 0.5),
+      Alignment(-1.5, 0.45),
+      Alignment(-1, 0.4),
+      Alignment(-0.5, 0.35),
+      Alignment(0, -0.4),
+      Alignment(0.5, 0.35),
+      Alignment(1, 0.4),
+      Alignment(1.5, 0.45),
+      Alignment(2, 0.5),
+      Alignment(2.5, 0.55),
     ];
 
     void _onTap() => setState(() => ++index);
