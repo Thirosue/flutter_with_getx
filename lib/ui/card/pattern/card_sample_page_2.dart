@@ -47,18 +47,20 @@ class _CardSampleState extends State<CardSamplePage2> {
     final deviceWidth = MediaQuery.of(context).size.width;
 
     final left = deviceWidth / 2 - width / 2;
+    final halfHeight = deviceHeight / 2;
+    const unitHeight = 20;
 
     var _alignments = [
-      Alignment(deviceHeight / 2 + 40, left - 70),
-      Alignment(deviceHeight / 2 + 20, left - 60),
-      Alignment(deviceHeight / 2, left - 50),
-      Alignment(deviceHeight / 2 - 20, left - 40),
-      Alignment(deviceHeight / 2 - 200, left),
-      Alignment(deviceHeight / 2 - 20, left + 40),
-      Alignment(deviceHeight / 2, left + 50),
-      Alignment(deviceHeight / 2 + 20, left + 60),
-      Alignment(deviceHeight / 2 + 40, left + 70),
-      Alignment(deviceHeight / 2 + 60, left + 80),
+      Alignment(halfHeight + unitHeight * 3, left - 70),
+      Alignment(halfHeight + unitHeight * 2, left - 60),
+      Alignment(halfHeight + unitHeight * 1, left - 50),
+      Alignment(halfHeight, left - 40),
+      Alignment(halfHeight - 200, left),
+      Alignment(halfHeight, left + 40),
+      Alignment(halfHeight + unitHeight * 1, left + 50),
+      Alignment(halfHeight + unitHeight * 2, left + 60),
+      Alignment(halfHeight + unitHeight * 3, left + 70),
+      Alignment(halfHeight + unitHeight * 4, left + 80),
     ];
 
     List _rotate(List items) {
@@ -129,13 +131,6 @@ class _CardSampleState extends State<CardSamplePage2> {
             ),
           ),
           Positioned(
-            top: _alignments[4].x,
-            left: _alignments[4].y,
-            width: width,
-            height: height,
-            child: _cards[4],
-          ),
-          Positioned(
             top: _alignments[5].x,
             left: _alignments[5].y,
             width: width,
@@ -184,6 +179,13 @@ class _CardSampleState extends State<CardSamplePage2> {
               angle: 20 * pi / 180,
               child: _cards[4],
             ),
+          ),
+          Positioned(
+            top: _alignments[4].x,
+            left: _alignments[4].y,
+            width: width,
+            height: height,
+            child: _cards[4],
           ),
         ],
       ),
