@@ -58,107 +58,17 @@ class _CardSampleState extends State<CardSamplePage2> {
     return Scaffold(
       body: Stack(
         children: [
-          AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[index % 10],
-            child: Transform.rotate(
-              angle: _angle(index % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[0],
-                cardNumber: (index % 10).toString(),
+          for (var i = 0; i <= 9; i++)
+            AnimatedContainer(
+              duration: duration,
+              alignment: _alignments[(index + i) % 10],
+              child: Transform.rotate(
+                angle: _angle((index + i) % 10),
+                child: CreditCard(
+                  cardBackground: cardBackgrounds[i],
+                ),
               ),
             ),
-          ),
-          AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + 1) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + 1) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[1],
-              ),
-            ),
-          ),
-          AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + 2) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + 2) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[2],
-              ),
-            ),
-          ),
-          AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + 3) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + 3) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[3],
-              ),
-            ),
-          ),
-          AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + 4) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + 4) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[4],
-              ),
-            ),
-          ),
-          AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + 5) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + 5) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[5],
-              ),
-            ),
-          ),
-          AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + 6) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + 6) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[6],
-              ),
-            ),
-          ),
-          AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + 7) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + 7) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[7],
-              ),
-            ),
-          ),
-          AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + 8) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + 8) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[8],
-              ),
-            ),
-          ),
-          AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + 9) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + 9) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[9],
-              ),
-            ),
-          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -166,4 +76,10 @@ class _CardSampleState extends State<CardSamplePage2> {
       ),
     );
   }
+}
+
+class Card {
+  int index;
+  Widget widget;
+  Card({required this.index, required this.widget});
 }
