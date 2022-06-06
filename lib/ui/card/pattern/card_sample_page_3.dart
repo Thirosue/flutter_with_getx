@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_with_getx/component/molecules/card/credit_card_widget.dart';
-import 'package:flutter_with_getx/data/model/card/card_background.dart';
 import 'package:flutter_with_getx/ui/card/pattern/card_sample_controller_3.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +11,7 @@ class CardSamplePage3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() => Stack(
-            children: (controller.cards.value) as List<Widget>,
+            children: controller.cards.value,
           )),
       floatingActionButton: FloatingActionButton(
         onPressed: controller.onTap,

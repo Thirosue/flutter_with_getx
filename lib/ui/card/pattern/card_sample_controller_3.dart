@@ -56,7 +56,7 @@ AnimatedContainer _card(int page, int i) => AnimatedContainer(
 
 class CardSampleController3 extends GetxController {
   final page = 0.obs;
-  final cards = [].obs;
+  final cards = Rx<List<Widget>>([]);
 
   @override
   void onInit() {
