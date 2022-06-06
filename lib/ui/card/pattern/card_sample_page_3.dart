@@ -20,27 +20,38 @@ final cardBackgrounds = [
 ];
 
 const _alignments = [
-  Alignment(-2, 0.5),
-  Alignment(-1.5, 0.45),
-  Alignment(-1, 0.4),
-  Alignment(-0.5, 0.35),
+  Alignment(-4.5, 0.5),
+  Alignment(-4, 0.4),
+  Alignment(-3.5, 0.3),
+  Alignment(-3, 0.2),
   Alignment(0, -0.4),
-  Alignment(0.5, 0.35),
-  Alignment(1, 0.4),
-  Alignment(1.5, 0.45),
-  Alignment(2, 0.5),
-  Alignment(2.5, 0.55),
+  Alignment(4, 0.35),
+  Alignment(4.5, 0.4),
+  Alignment(5, 0.45),
+  Alignment(5.5, 0.5),
+  Alignment(6, 0.55),
 ];
 
 double _angle(int index) {
   if (index < 4) {
-    return -110 * pi / 180;
+    return -115 * pi / 180;
   } else if (index == 4) {
     return 90 * pi / 180;
   } else {
-    return 110 * pi / 180;
+    return 120 * pi / 180;
   }
 }
+
+AnimatedContainer _card(int page, int i) => AnimatedContainer(
+      duration: duration,
+      alignment: _alignments[(page + i) % 10],
+      child: Transform.rotate(
+        angle: _angle((page + i) % 10),
+        child: CreditCard(
+          cardBackground: cardBackgrounds[i],
+        ),
+      ),
+    );
 
 class CardSamplePage3 extends StatefulWidget {
   const CardSamplePage3({Key? key}) : super(key: key);
@@ -50,30 +61,33 @@ class CardSamplePage3 extends StatefulWidget {
 }
 
 class _CardSampleState extends State<CardSamplePage3> {
-  int index = 0;
+  int page = 0;
+  late List<AnimatedContainer> cards;
+
+  @override
+  initState() {
+    super.initState();
+    cards = List.generate(10, (i) => i)
+        .map(
+          (i) => _card(page, i),
+        )
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
-    void _onTap() => setState(() => ++index);
-
-    final cardList = List.generate(10, (i) => i)
-        .map(
-          (i) => AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + i) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + i) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[i],
-              ),
-            ),
-          ),
-        )
-        .toList();
+    void _onTap() => setState(() {
+          ++page;
+          cards = List.generate(10, (i) => i)
+              .map(
+                (i) => _card(page, i),
+              )
+              .toList();
+        });
 
     return Scaffold(
       body: Stack(
-        children: cardList,
+        children: cards,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _onTap,
