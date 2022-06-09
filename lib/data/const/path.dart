@@ -11,4 +11,5 @@ class Path {
   static const String cardsample = '/cardsample';
   static const String cardsample2 = '/cardsample2';
   static const String cardsample3 = '/cardsample3';
+  static const String cardsample4 = '/cardsample4';
 }
