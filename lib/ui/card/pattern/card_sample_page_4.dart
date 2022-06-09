@@ -49,31 +49,60 @@ class CardSamplePage4 extends StatefulWidget {
   State<CardSamplePage4> createState() => _CardSampleState();
 }
 
-class _CardSampleState extends State<CardSamplePage4> {
+class _CardSampleState extends State<CardSamplePage4>
+    with SingleTickerProviderStateMixin {
+  late Animation<double> animation;
+  late AnimationController controller;
+
   int index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this);
+    animation = Tween<double>(begin: 0, end: 300).animate(controller)
+      ..addListener(() {
+        setState(() {
+          // The state that has changed here is the animation object’s value.
+        });
+      });
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     void _onTap() => setState(() => ++index);
 
-    final cardList = List.generate(10, (i) => i)
-        .map(
-          (i) => AnimatedContainer(
-            duration: duration,
-            alignment: _alignments[(index + i) % 10],
-            child: Transform.rotate(
-              angle: _angle((index + i) % 10),
-              child: CreditCard(
-                cardBackground: cardBackgrounds[i],
-              ),
-            ),
-          ),
-        )
-        .toList();
+    // final cardList = List.generate(10, (i) => i)
+    //     .map(
+    //       (i) => AnimatedContainer(
+    //         duration: duration,
+    //         alignment: _alignments[(index + i) % 10],
+    //         child: Transform.rotate(
+    //           angle: _angle((index + i) % 10),
+    //           child: CreditCard(
+    //             cardBackground: cardBackgrounds[i],
+    //           ),
+    //         ),
+    //       ),
+    //     )
+    //     .toList();
 
     return Scaffold(
-      body: Stack(
-        children: cardList,
+      body: SizedBox(
+        height: animation.value,
+        width: animation.value,
+        child: CreditCard(
+          cardBackground: cardBackgrounds[0],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _onTap,
