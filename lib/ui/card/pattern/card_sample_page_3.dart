@@ -10,9 +10,11 @@ class CardSamplePage3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => Stack(
-            children: controller.cards.value,
-          )),
+      body: Obx(
+        () => Stack(
+          children: controller.cards.value,
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: controller.onTap,
       ),

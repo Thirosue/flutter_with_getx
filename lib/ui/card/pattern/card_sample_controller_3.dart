@@ -43,7 +43,7 @@ double _angle(int index) {
   }
 }
 
-AnimatedContainer _card(int page, int i) => AnimatedContainer(
+AnimatedAlign _card(int page, int i) => AnimatedAlign(
       duration: duration,
       alignment: _alignments[(page + i) % 10],
       child: Transform.rotate(
@@ -61,11 +61,9 @@ class CardSampleController3 extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     cards.listen((status) {
       debugPrint('hoge');
-      // cards.sort((a, b) =>
-      //     (((b as AnimatedContainer).alignment as Alignment).x.ceil() -
-      //         ((a as AnimatedContainer).alignment as Alignment).x.ceil()));
     });
 
     cards.value = List.generate(10, (i) => i)
@@ -82,5 +80,8 @@ class CardSampleController3 extends GetxController {
           (i) => _card(page.value, i),
         )
         .toList();
+    // cards.value.sort((a, b) =>
+    //     ((((a as AnimatedAlign).alignment as Alignment).x * 10).ceil() -
+    //         (((b as AnimatedAlign).alignment as Alignment).x * 10).ceil()));
   }
 }
