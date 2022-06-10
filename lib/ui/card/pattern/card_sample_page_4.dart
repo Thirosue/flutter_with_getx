@@ -51,25 +51,36 @@ class CardSamplePage4 extends StatefulWidget {
 
 class _CardSampleState extends State<CardSamplePage4>
     with SingleTickerProviderStateMixin {
-  late Animation<double> animation;
-  late AnimationController controller;
-
   int index = 0;
-
-  @override
-  void initState() {
-    super.initState();
-
-    controller =
-        AnimationController(duration: const Duration(seconds: 1), vsync: this);
-    animation = Tween<double>(begin: 0, end: 300).animate(controller)
-      ..addListener(() {
-        setState(() {
-          // The state that has changed here is the animation object’s value.
-        });
-      });
-    controller.forward();
-  }
+  late AnimationController controller =
+      AnimationController(duration: const Duration(seconds: 1), vsync: this);
+  late List<Animation<Alignment>> alignments = List.generate(10, (i) => i)
+      .map(
+        (i) => controller
+            .drive(
+              CurveTween(curve: Curves.bounceOut),
+            )
+            .drive(
+              AlignmentTween(
+                begin: _alignments[(index + i) % 10],
+                end: _alignments[(index + i + 1) % 10],
+              ),
+            ),
+      )
+      .toList();
+  late List<AlignTransition> cards = List.generate(10, (i) => i)
+      .map(
+        (i) => AlignTransition(
+          alignment: alignments[(index + i) % 10],
+          child: Transform.rotate(
+            angle: _angle((index + i) % 10),
+            child: CreditCard(
+              cardBackground: cardBackgrounds[i],
+            ),
+          ),
+        ),
+      )
+      .toList();
 
   @override
   void dispose() {
@@ -79,30 +90,53 @@ class _CardSampleState extends State<CardSamplePage4>
 
   @override
   Widget build(BuildContext context) {
-    void _onTap() => setState(() => ++index);
-
-    // final cardList = List.generate(10, (i) => i)
-    //     .map(
-    //       (i) => AnimatedContainer(
-    //         duration: duration,
-    //         alignment: _alignments[(index + i) % 10],
-    //         child: Transform.rotate(
-    //           angle: _angle((index + i) % 10),
-    //           child: CreditCard(
-    //             cardBackground: cardBackgrounds[i],
-    //           ),
-    //         ),
-    //       ),
-    //     )
-    //     .toList();
+    void _onTap() {
+      controller.reset();
+      controller.forward();
+      setState(() {
+        ++index;
+        cards = List.generate(10, (i) => i)
+            .map(
+              (i) => AlignTransition(
+                alignment: alignments[(index + i) % 10],
+                child: Transform.rotate(
+                  angle: _angle((index + i + 1) % 10),
+                  child: CreditCard(
+                    cardBackground: cardBackgrounds[i],
+                  ),
+                ),
+              ),
+            )
+            .toList();
+        debugPrint("before--------");
+        cards.forEach((element) {
+          debugPrint(
+              (element.alignment as Animation<Alignment>).value.x.toString());
+          debugPrint(
+              (((element.alignment as Animation<Alignment>).value.x + 10) * 10)
+                  .ceil()
+                  .toString());
+        });
+        cards.sort((a, b) =>
+            ((((a.alignment as Animation<Alignment>).value.x + 10) * 10)
+                    .ceil() -
+                (((b.alignment as Animation<Alignment>).value.x + 10) * 10)
+                    .ceil()));
+        debugPrint("after--------");
+        cards.forEach((element) {
+          debugPrint(
+              (element.alignment as Animation<Alignment>).value.x.toString());
+          debugPrint(
+              (((element.alignment as Animation<Alignment>).value.x + 10) * 10)
+                  .ceil()
+                  .toString());
+        });
+      });
+    }
 
     return Scaffold(
-      body: SizedBox(
-        height: animation.value,
-        width: animation.value,
-        child: CreditCard(
-          cardBackground: cardBackgrounds[0],
-        ),
+      body: Stack(
+        children: cards,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _onTap,
