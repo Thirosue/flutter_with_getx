@@ -42,6 +42,17 @@ double _angle(int index) {
   }
 }
 
+int _x(Animation<AlignmentGeometry> value) {
+  return ((double.parse(value
+              .toStringDetails()
+              .split(' → ')[1]
+              .replaceFirst('Alignment(', '')
+              .replaceAll(')', '')
+              .split(',')[0])) *
+          10)
+      .ceil();
+}
+
 class CardSamplePage4 extends StatefulWidget {
   const CardSamplePage4({Key? key}) : super(key: key);
 
@@ -109,28 +120,14 @@ class _CardSampleState extends State<CardSamplePage4>
             )
             .toList();
         debugPrint("before--------");
-        cards.forEach((element) {
-          debugPrint(
-              (element.alignment as Animation<Alignment>).value.x.toString());
-          debugPrint(
-              (((element.alignment as Animation<Alignment>).value.x + 10) * 10)
-                  .ceil()
-                  .toString());
-        });
-        cards.sort((a, b) =>
-            ((((a.alignment as Animation<Alignment>).value.x + 10) * 10)
-                    .ceil() -
-                (((b.alignment as Animation<Alignment>).value.x + 10) * 10)
-                    .ceil()));
+        for (var element in cards) {
+          debugPrint(element.alignment.toStringDetails());
+        }
+        cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
         debugPrint("after--------");
-        cards.forEach((element) {
-          debugPrint(
-              (element.alignment as Animation<Alignment>).value.x.toString());
-          debugPrint(
-              (((element.alignment as Animation<Alignment>).value.x + 10) * 10)
-                  .ceil()
-                  .toString());
-        });
+        for (var element in cards) {
+          debugPrint(element.alignment.toStringDetails());
+        }
       });
     }
 
