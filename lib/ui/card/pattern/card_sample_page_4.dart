@@ -7,16 +7,16 @@ import 'package:flutter_with_getx/data/model/card/card_background.dart';
 const duration = Duration(milliseconds: 250);
 
 final cardBackgrounds = [
-  SolidColorCardBackground(Colors.black.withOpacity(0.8)),
-  SolidColorCardBackground(Colors.blue.withOpacity(0.8)),
-  SolidColorCardBackground(Colors.yellow.withOpacity(0.8)),
-  SolidColorCardBackground(Colors.red.withOpacity(0.8)),
-  SolidColorCardBackground(Colors.purple.withOpacity(0.8)),
-  SolidColorCardBackground(Colors.black.withOpacity(0.8)),
-  SolidColorCardBackground(Colors.blue.withOpacity(0.8)),
-  SolidColorCardBackground(Colors.yellow.withOpacity(0.8)),
-  SolidColorCardBackground(Colors.red.withOpacity(0.8)),
-  SolidColorCardBackground(Colors.purple.withOpacity(0.8)),
+  SolidColorCardBackground(Colors.black),
+  SolidColorCardBackground(Colors.blue),
+  SolidColorCardBackground(Colors.yellow),
+  SolidColorCardBackground(Colors.red),
+  SolidColorCardBackground(Colors.purple),
+  SolidColorCardBackground(Colors.black),
+  SolidColorCardBackground(Colors.blue),
+  SolidColorCardBackground(Colors.yellow),
+  SolidColorCardBackground(Colors.red),
+  SolidColorCardBackground(Colors.purple),
 ];
 
 const _alignments = [
@@ -52,13 +52,13 @@ class CardSamplePage4 extends StatefulWidget {
 class _CardSampleState extends State<CardSamplePage4>
     with SingleTickerProviderStateMixin {
   int index = 0;
-  late AnimationController controller =
-      AnimationController(duration: const Duration(seconds: 1), vsync: this);
+  late AnimationController controller = AnimationController(
+      duration: const Duration(milliseconds: 500), vsync: this);
   late List<Animation<Alignment>> alignments = List.generate(10, (i) => i)
       .map(
         (i) => controller
             .drive(
-              CurveTween(curve: Curves.bounceOut),
+              CurveTween(curve: Curves.decelerate),
             )
             .drive(
               AlignmentTween(
