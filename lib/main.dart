@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark =
-        SchedulerBinding.instance?.window.platformBrightness == Brightness.dark;
+        SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
     debugPrint('darkmode: $dark');
 
     // redirect settings
@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: Path.cardsample, page: () => const CardSamplePage()),
         GetPage(name: Path.cardsample2, page: () => const CardSamplePage2()),
         GetPage(name: Path.cardsample3, page: () => CardSamplePage3()),
-        GetPage(name: Path.cardsample4, page: () => CardSamplePage4()),
+        GetPage(name: Path.cardsample4, page: () => const CardSamplePage4()),
       ],
       builder: EasyLoading.init(),
     );
