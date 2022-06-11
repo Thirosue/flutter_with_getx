@@ -63,7 +63,8 @@ class CardSamplePage4 extends StatefulWidget {
 class _CardSampleState extends State<CardSamplePage4>
     with SingleTickerProviderStateMixin {
   int index = 0;
-  int vector = 0; // foward: 1, reverse: -1
+  List<int> vector = []; // foward: 1, reverse: -1
+  int correctionValue = 0;
   late AnimationController controller = AnimationController(
       duration: const Duration(milliseconds: 500), vsync: this);
   late List<Animation<Alignment>> forwardAlignments =
@@ -120,9 +121,8 @@ class _CardSampleState extends State<CardSamplePage4>
   Widget build(BuildContext context) {
     void _forward() {
       setState(() {
-        if (vector == -1) {
+        if (vector.every((element) => element == -1)) {
           debugPrint('reverse -> foward');
-          // ++index;
         }
 
         cards = List.generate(10, (i) => i)
@@ -140,16 +140,9 @@ class _CardSampleState extends State<CardSamplePage4>
             .toList();
         ++index;
 
-        // debugPrint("forward before--------");
-        // for (var element in cards) {
-        //   debugPrint((element.alignment).toStringDetails());
-        // }
         cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
-        // debugPrint("forward after--------");
-        // for (var element in cards) {
-        //   debugPrint((element.alignment).toStringDetails());
-        // }
-        vector = 1;
+
+        vector.add(1);
       });
       controller.reset();
       controller.forward();
@@ -157,15 +150,17 @@ class _CardSampleState extends State<CardSamplePage4>
 
     void _reverse() {
       setState(() {
-        if (vector == 1) {
+        if (vector.every((element) => element == 1)) {
+          correctionValue = vector.length;
           debugPrint('foward -> revese');
-          // --index;
+          debugPrint('correctionValue:' + correctionValue.toString());
         }
 
         cards = List.generate(10, (i) => i)
             .map(
               (i) => AlignTransition(
-                alignment: reverseAlignments[(index + i) % 10],
+                alignment:
+                    reverseAlignments[(index + i - correctionValue) % 10],
                 child: Transform.rotate(
                   angle: _angle((index + i - 1) % 10),
                   child: CreditCard(
@@ -177,19 +172,16 @@ class _CardSampleState extends State<CardSamplePage4>
             .toList();
         --index;
 
-        // debugPrint("reverse before--------");
+        //debugPrint("reverse before--------");
         // for (var element in cards) {
-        //   debugPrint((element.alignment).toStringDetails());
+        //   debugPrint(element.toString());
         // }
         cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
-        // cards.sort((a, b) =>
-        //     (((a.alignment.value as Alignment).x * 10).ceil() -
-        //         ((b.alignment.value as Alignment).x * 10).ceil()));
         // debugPrint("reverse after--------");
         // for (var element in cards) {
         //   debugPrint((element.alignment).toStringDetails());
         // }
-        vector = -1;
+        vector.add(-1);
       });
       controller.reset();
       controller.forward();
