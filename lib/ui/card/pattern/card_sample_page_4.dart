@@ -127,6 +127,7 @@ class _CardSampleState extends State<CardSamplePage4>
                   angle: _angle((index + i + 1) % 10),
                   child: CreditCard(
                     cardBackground: cardBackgrounds[i],
+                    cardNumber: index.toString(),
                   ),
                 ),
               ),
@@ -134,12 +135,12 @@ class _CardSampleState extends State<CardSamplePage4>
             .toList();
         ++index;
 
-        debugPrint("before--------");
+        debugPrint("forward before--------");
         for (var element in cards) {
           debugPrint((element.alignment).toStringDetails());
         }
         cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
-        debugPrint("after--------");
+        debugPrint("forward after--------");
         for (var element in cards) {
           debugPrint((element.alignment).toStringDetails());
         }
@@ -155,9 +156,10 @@ class _CardSampleState extends State<CardSamplePage4>
               (i) => AlignTransition(
                 alignment: reverseAlignments[(index + i) % 10],
                 child: Transform.rotate(
-                  angle: _angle((index + i) % 10),
+                  angle: _angle((index + i - 1) % 10),
                   child: CreditCard(
                     cardBackground: cardBackgrounds[i],
+                    cardNumber: index.toString(),
                   ),
                 ),
               ),
@@ -165,12 +167,12 @@ class _CardSampleState extends State<CardSamplePage4>
             .toList();
         --index;
 
-        debugPrint("before--------");
+        debugPrint("reverse before--------");
         for (var element in cards) {
           debugPrint((element.alignment).toStringDetails());
         }
         cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
-        debugPrint("after--------");
+        debugPrint("reverse after--------");
         for (var element in cards) {
           debugPrint((element.alignment).toStringDetails());
         }
