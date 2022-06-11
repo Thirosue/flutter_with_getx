@@ -63,6 +63,7 @@ class CardSamplePage4 extends StatefulWidget {
 class _CardSampleState extends State<CardSamplePage4>
     with SingleTickerProviderStateMixin {
   int index = 0;
+  int vector = 0; // foward: 1, reverse: -1
   late AnimationController controller = AnimationController(
       duration: const Duration(milliseconds: 500), vsync: this);
   late List<Animation<Alignment>> forwardAlignments =
@@ -119,6 +120,11 @@ class _CardSampleState extends State<CardSamplePage4>
   Widget build(BuildContext context) {
     void _forward() {
       setState(() {
+        if (vector == -1) {
+          debugPrint('reverse -> foward');
+          // ++index;
+        }
+
         cards = List.generate(10, (i) => i)
             .map(
               (i) => AlignTransition(
@@ -127,7 +133,6 @@ class _CardSampleState extends State<CardSamplePage4>
                   angle: _angle((index + i + 1) % 10),
                   child: CreditCard(
                     cardBackground: cardBackgrounds[i],
-                    cardNumber: index.toString(),
                   ),
                 ),
               ),
@@ -135,15 +140,16 @@ class _CardSampleState extends State<CardSamplePage4>
             .toList();
         ++index;
 
-        debugPrint("forward before--------");
-        for (var element in cards) {
-          debugPrint((element.alignment).toStringDetails());
-        }
+        // debugPrint("forward before--------");
+        // for (var element in cards) {
+        //   debugPrint((element.alignment).toStringDetails());
+        // }
         cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
-        debugPrint("forward after--------");
-        for (var element in cards) {
-          debugPrint((element.alignment).toStringDetails());
-        }
+        // debugPrint("forward after--------");
+        // for (var element in cards) {
+        //   debugPrint((element.alignment).toStringDetails());
+        // }
+        vector = 1;
       });
       controller.reset();
       controller.forward();
@@ -151,6 +157,11 @@ class _CardSampleState extends State<CardSamplePage4>
 
     void _reverse() {
       setState(() {
+        if (vector == 1) {
+          debugPrint('foward -> revese');
+          // --index;
+        }
+
         cards = List.generate(10, (i) => i)
             .map(
               (i) => AlignTransition(
@@ -159,7 +170,6 @@ class _CardSampleState extends State<CardSamplePage4>
                   angle: _angle((index + i - 1) % 10),
                   child: CreditCard(
                     cardBackground: cardBackgrounds[i],
-                    cardNumber: index.toString(),
                   ),
                 ),
               ),
@@ -167,21 +177,30 @@ class _CardSampleState extends State<CardSamplePage4>
             .toList();
         --index;
 
-        debugPrint("reverse before--------");
-        for (var element in cards) {
-          debugPrint((element.alignment).toStringDetails());
-        }
+        // debugPrint("reverse before--------");
+        // for (var element in cards) {
+        //   debugPrint((element.alignment).toStringDetails());
+        // }
         cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
-        debugPrint("reverse after--------");
-        for (var element in cards) {
-          debugPrint((element.alignment).toStringDetails());
-        }
+        // cards.sort((a, b) =>
+        //     (((a.alignment.value as Alignment).x * 10).ceil() -
+        //         ((b.alignment.value as Alignment).x * 10).ceil()));
+        // debugPrint("reverse after--------");
+        // for (var element in cards) {
+        //   debugPrint((element.alignment).toStringDetails());
+        // }
+        vector = -1;
       });
       controller.reset();
       controller.forward();
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          index.toString(),
+        ),
+      ),
       body: Stack(
         children: cards,
       ),
