@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_with_getx/component/molecules/card/credit_card_widget.dart';
 import 'package:flutter_with_getx/data/model/card/card_background.dart';
 
-const duration = Duration(milliseconds: 250);
+const duration = Duration(milliseconds: 500);
 
 final cardBackgrounds = [
   SolidColorCardBackground(Colors.black),
@@ -64,9 +64,9 @@ class _CardSampleState extends State<CardSamplePage4>
     with SingleTickerProviderStateMixin {
   int index = 0;
   List<int> vector = []; // foward: 1, reverse: -1
-  int correctionValue = 0;
-  late AnimationController controller = AnimationController(
-      duration: const Duration(milliseconds: 500), vsync: this);
+  int correctionValue = 0; // 初回補正値
+  late AnimationController controller =
+      AnimationController(duration: duration, vsync: this);
   late List<Animation<Alignment>> forwardAlignments =
       List.generate(10, (i) => i)
           .map(
@@ -140,7 +140,8 @@ class _CardSampleState extends State<CardSamplePage4>
             .toList();
         ++index;
 
-        cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
+        cards.sort(
+            (a, b) => (_x(a.alignment) - _x(b.alignment))); // 左のカードを前面に配置する
 
         vector.add(1);
       });
@@ -153,7 +154,8 @@ class _CardSampleState extends State<CardSamplePage4>
         if (vector.every((element) => element == 1)) {
           correctionValue = vector.length;
           debugPrint('foward -> revese');
-          debugPrint('correctionValue:' + correctionValue.toString());
+          debugPrint('correctionValue:' +
+              correctionValue.toString()); // 初回 forward -> reverse のみ補正が必要
         }
 
         cards = List.generate(10, (i) => i)
@@ -172,15 +174,9 @@ class _CardSampleState extends State<CardSamplePage4>
             .toList();
         --index;
 
-        //debugPrint("reverse before--------");
-        // for (var element in cards) {
-        //   debugPrint(element.toString());
-        // }
-        cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
-        // debugPrint("reverse after--------");
-        // for (var element in cards) {
-        //   debugPrint((element.alignment).toStringDetails());
-        // }
+        cards.sort(
+            (a, b) => (_x(a.alignment) - _x(b.alignment))); // 左のカードを前面に配置する
+
         vector.add(-1);
       });
       controller.reset();
@@ -193,8 +189,21 @@ class _CardSampleState extends State<CardSamplePage4>
           index.toString(),
         ),
       ),
-      body: Stack(
-        children: cards,
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onHorizontalDragEnd: (details) {
+          if (details.primaryVelocity! > 0) {
+            debugPrint('右スワイプ forward');
+            _forward();
+          }
+          if (details.primaryVelocity! < 0) {
+            debugPrint('左スワイプ reverse');
+            _reverse();
+          }
+        },
+        child: Stack(
+          children: cards,
+        ),
       ),
       floatingActionButton: Column(
         verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
@@ -218,10 +227,4 @@ class _CardSampleState extends State<CardSamplePage4>
       ),
     );
   }
-}
-
-class Card {
-  int index;
-  Widget widget;
-  Card({required this.index, required this.widget});
 }
