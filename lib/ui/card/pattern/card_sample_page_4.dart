@@ -65,24 +65,40 @@ class _CardSampleState extends State<CardSamplePage4>
   int index = 0;
   late AnimationController controller = AnimationController(
       duration: const Duration(milliseconds: 500), vsync: this);
-  late List<Animation<Alignment>> alignments = List.generate(10, (i) => i)
-      .map(
-        (i) => controller
-            .drive(
-              CurveTween(curve: Curves.decelerate),
-            )
-            .drive(
-              AlignmentTween(
-                begin: _alignments[(index + i) % 10],
-                end: _alignments[(index + i + 1) % 10],
-              ),
-            ),
-      )
-      .toList();
+  late List<Animation<Alignment>> forwardAlignments =
+      List.generate(10, (i) => i)
+          .map(
+            (i) => controller
+                .drive(
+                  CurveTween(curve: Curves.decelerate),
+                )
+                .drive(
+                  AlignmentTween(
+                    begin: _alignments[(index + i) % 10],
+                    end: _alignments[(index + i + 1) % 10],
+                  ),
+                ),
+          )
+          .toList();
+  late List<Animation<Alignment>> reverseAlignments =
+      List.generate(10, (i) => i)
+          .map(
+            (i) => controller
+                .drive(
+                  CurveTween(curve: Curves.decelerate),
+                )
+                .drive(
+                  AlignmentTween(
+                    begin: _alignments[(index + i) % 10],
+                    end: _alignments[(index + i - 1) % 10],
+                  ),
+                ),
+          )
+          .toList();
   late List<AlignTransition> cards = List.generate(10, (i) => i)
       .map(
         (i) => AlignTransition(
-          alignment: alignments[(index + i) % 10],
+          alignment: forwardAlignments[(index + i) % 10],
           child: Transform.rotate(
             angle: _angle((index + i) % 10),
             child: CreditCard(
@@ -101,15 +117,12 @@ class _CardSampleState extends State<CardSamplePage4>
 
   @override
   Widget build(BuildContext context) {
-    void _onTap() {
-      controller.reset();
-      controller.forward();
+    void _forward() {
       setState(() {
-        ++index;
         cards = List.generate(10, (i) => i)
             .map(
               (i) => AlignTransition(
-                alignment: alignments[(index + i) % 10],
+                alignment: forwardAlignments[(index + i) % 10],
                 child: Transform.rotate(
                   angle: _angle((index + i + 1) % 10),
                   child: CreditCard(
@@ -119,24 +132,76 @@ class _CardSampleState extends State<CardSamplePage4>
               ),
             )
             .toList();
+        ++index;
+
         debugPrint("before--------");
         for (var element in cards) {
-          debugPrint(element.alignment.toStringDetails());
+          debugPrint((element.alignment).toStringDetails());
         }
         cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
         debugPrint("after--------");
         for (var element in cards) {
-          debugPrint(element.alignment.toStringDetails());
+          debugPrint((element.alignment).toStringDetails());
         }
       });
+      controller.reset();
+      controller.forward();
+    }
+
+    void _reverse() {
+      setState(() {
+        cards = List.generate(10, (i) => i)
+            .map(
+              (i) => AlignTransition(
+                alignment: reverseAlignments[(index + i) % 10],
+                child: Transform.rotate(
+                  angle: _angle((index + i) % 10),
+                  child: CreditCard(
+                    cardBackground: cardBackgrounds[i],
+                  ),
+                ),
+              ),
+            )
+            .toList();
+        --index;
+
+        debugPrint("before--------");
+        for (var element in cards) {
+          debugPrint((element.alignment).toStringDetails());
+        }
+        cards.sort((a, b) => (_x(a.alignment) - _x(b.alignment)));
+        debugPrint("after--------");
+        for (var element in cards) {
+          debugPrint((element.alignment).toStringDetails());
+        }
+      });
+      controller.reset();
+      controller.forward();
     }
 
     return Scaffold(
       body: Stack(
         children: cards,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _onTap,
+      floatingActionButton: Column(
+        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          FloatingActionButton(
+            child: const Icon(Icons.remove),
+            backgroundColor: Colors.red,
+            onPressed: _reverse,
+          ),
+          Container(
+            // 余白のためContainerでラップ
+            margin: const EdgeInsets.only(bottom: 16.0),
+            child: FloatingActionButton(
+              child: const Icon(Icons.add),
+              backgroundColor: Colors.blue,
+              onPressed: _forward,
+            ),
+          ),
+        ],
       ),
     );
   }
