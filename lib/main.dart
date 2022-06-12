@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: Path.cardsample, page: () => const CardSamplePage()),
         GetPage(name: Path.cardsample2, page: () => const CardSamplePage2()),
         GetPage(name: Path.cardsample3, page: () => CardSamplePage3()),
-        GetPage(name: Path.cardsample4, page: () => const CardSamplePage4()),
+        GetPage(name: Path.cardsample4, page: () => CardSamplePage4()),
       ],
       builder: EasyLoading.init(),
     );
