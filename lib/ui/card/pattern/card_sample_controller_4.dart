@@ -9,6 +9,7 @@ import 'package:flutter_with_getx/data/model/card/card_network_type.dart';
 import 'package:flutter_with_getx/data/model/response/c_card.dart';
 import 'package:flutter_with_getx/data/repository/card_repository.dart';
 import 'package:flutter_with_getx/helpers/wait.dart';
+import 'package:flutter_with_getx/ui/card/detail/card_detail_page.dart';
 import 'package:get/get.dart';
 
 const duration = Duration(milliseconds: 500);
@@ -78,7 +79,7 @@ AlignTransition _alignTransition({
       ),
     );
 
-List<AlignTransition> _cards({
+List<GestureDetector> _cards({
   required int size,
   required int index,
   required List<Animation<Alignment>> alignments,
@@ -87,12 +88,23 @@ List<AlignTransition> _cards({
 }) =>
     List.generate(size, (i) => i)
         .map(
-          (i) => _alignTransition(
-            index: index,
-            i: i,
-            alignments: alignments,
-            card: cards[i],
-            correction: correction,
+          (i) => GestureDetector(
+            onTap: () {
+              debugPrint('Clicked at index: $index');
+              debugPrint(cards[i].toString());
+              // Get.to(
+              //   () => const CardDetailPage(),
+              //   arguments: cards[i],
+              //   fullscreenDialog: true,
+              // );
+            },
+            child: _alignTransition(
+              index: index,
+              i: i,
+              alignments: alignments,
+              card: cards[i],
+              correction: correction,
+            ),
           ),
         )
         .toList();
@@ -110,7 +122,7 @@ class CardSampleController4 extends GetxController
   late List<CCard> cardList;
   late int size;
   final index = 0.obs;
-  final cards = Rx<List<AlignTransition>>([]);
+  final cards = Rx<List<GestureDetector>>([]);
 
   @override
   void onInit() async {
@@ -183,8 +195,8 @@ class CardSampleController4 extends GetxController
 
     ++index.value;
 
-    cards.value
-        .sort((a, b) => (_x(a.alignment) - _x(b.alignment))); // 左のカードを前面に配置する
+    cards.value.sort((a, b) => (_x((a.child as AlignTransition).alignment) -
+        _x((b.child as AlignTransition).alignment))); // 左のカードを前面に配置する
 
     controller.reset();
     controller.forward();
@@ -200,8 +212,8 @@ class CardSampleController4 extends GetxController
     );
     --index.value;
 
-    cards.value
-        .sort((a, b) => (_x(a.alignment) - _x(b.alignment))); // 左のカードを前面に配置する
+    cards.value.sort((a, b) => (_x((a.child as AlignTransition).alignment) -
+        _x((b.child as AlignTransition).alignment))); // 左のカードを前面に配置する
 
     controller.reset();
     controller.forward();
