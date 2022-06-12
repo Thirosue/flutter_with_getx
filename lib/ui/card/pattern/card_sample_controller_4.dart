@@ -91,12 +91,11 @@ List<GestureDetector> _cards({
           (i) => GestureDetector(
             onTap: () {
               debugPrint('Clicked at index: $index');
-              debugPrint(cards[i].toString());
-              // Get.to(
-              //   () => const CardDetailPage(),
-              //   arguments: cards[i],
-              //   fullscreenDialog: true,
-              // );
+              Get.to(
+                () => const CardDetailPage(),
+                arguments: cards[i],
+                fullscreenDialog: true,
+              );
             },
             child: _alignTransition(
               index: index,

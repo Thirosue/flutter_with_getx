@@ -6,7 +6,7 @@ import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/data/model/card/card_background.dart';
 import 'package:flutter_with_getx/data/model/card/card_campany.dart';
 import 'package:flutter_with_getx/data/model/card/card_network_type.dart';
-import 'package:flutter_with_getx/data/model/card/validity.dart';
+import 'package:flutter_with_getx/data/model/response/c_card.dart';
 import 'package:flutter_with_getx/data/repository/card_repository.dart';
 import 'package:flutter_with_getx/ui/card/detail/card_detail_controller.dart';
 import 'package:get/get.dart';
@@ -51,7 +51,7 @@ class CardDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dynamic card = Get.arguments;
+    final card = Get.arguments as CCard;
 
     final controller = Get.put(
       CardDetailController(
@@ -75,14 +75,10 @@ class CardDetailPage extends StatelessWidget {
               CreditCard(
                 cardBackground: ImageCardBackground(
                     const AssetImage('images/background_sample.png')),
-                cardNetworkType: CardNetworkType.mastercard,
-                cardHolderName: 'Gursheesh Singh',
-                cardNumber: '2434 2434 **** ****',
-                company: CardCompany.kotak,
-                validity: Validity(
-                  validThruMonth: 1,
-                  validThruYear: 2023,
-                ),
+                cardNetworkType: CardNetworkType.of(card.type!),
+                cardHolderName: card.name,
+                cardNumber: card.cardNumber,
+                company: CardCompany.of(card.campany!),
               ),
               const SizedBox(
                 height: 24,

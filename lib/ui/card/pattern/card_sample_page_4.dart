@@ -41,6 +41,7 @@ class CardSamplePage4 extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           FloatingActionButton(
+            heroTag: "hero1",
             child: const Icon(Icons.remove),
             backgroundColor: Colors.red,
             onPressed: controller.reverse,
@@ -49,6 +50,7 @@ class CardSamplePage4 extends StatelessWidget {
             height: 16,
           ),
           FloatingActionButton(
+            heroTag: "hero2",
             child: const Icon(Icons.add),
             backgroundColor: Colors.blue,
             onPressed: controller.forward,
