@@ -37,7 +37,7 @@ class CardSamplePage4 extends StatelessWidget {
         ),
       ),
       floatingActionButton: Column(
-        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
+        verticalDirection: VerticalDirection.up,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           FloatingActionButton(
@@ -45,14 +45,13 @@ class CardSamplePage4 extends StatelessWidget {
             backgroundColor: Colors.red,
             onPressed: controller.reverse,
           ),
-          Container(
-            // 余白のためContainerでラップ
-            margin: const EdgeInsets.only(bottom: 16.0),
-            child: FloatingActionButton(
-              child: const Icon(Icons.add),
-              backgroundColor: Colors.blue,
-              onPressed: controller.forward,
-            ),
+          const SizedBox(
+            height: 16,
+          ),
+          FloatingActionButton(
+            child: const Icon(Icons.add),
+            backgroundColor: Colors.blue,
+            onPressed: controller.forward,
           ),
         ],
       ),
