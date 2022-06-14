@@ -32,38 +32,29 @@ https://docs.flutter.dev/get-started/install
 
 https://docs.flutter.dev/get-started/editor?tab=vscode
 
-### fvm setup
-
-https://fvm.app/docs/getting_started/installation
-
-### Set up the version of Flutter used in your project
-
-```bash
-$ fvm install
-```
 
 ## run application with debug
 
 ```bash
-$ fvm flutter run
+$ flutter run
 ```
 
 ## run test
 
 ```bash
-$ fvm flutter test
+$ flutter test
 ```
 
 ## analyze code
 
 ```bash
-$ fvm flutter analyze
+$ flutter analyze
 ```
 
 ## Code Generate
 
 ```
-$ fvm flutter pub run build_runner build --delete-conflicting-outputs
+$ flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
 ## XCode
@@ -81,11 +72,11 @@ $ open ios/Runner.xcodeproj
 * Android Application Package
 
 ```bash
-$ fvm flutter build apk --flavor production
+$ flutter build apk --flavor production
 ```
 
 * Android App Bundle
 
 ```bash
-$ fvm flutter build appbundle --flavor production
+$ flutter build appbundle --flavor production
 ```
