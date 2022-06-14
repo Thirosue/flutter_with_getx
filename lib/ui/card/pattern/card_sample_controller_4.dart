@@ -191,6 +191,7 @@ class CardSampleController4 extends GetxController
       cards: cardList,
       correction: 1,
     );
+
     ++index.value;
 
     cards.value.sort((a, b) => (_x((a.child as AlignTransition).alignment) -

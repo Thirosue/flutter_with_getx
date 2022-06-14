@@ -16,9 +16,11 @@ jobs:
         java-version: '11'
     - uses: subosito/flutter-action@v2
       with:
-        channel: 'stable'
-    - run: flutter --version
-    - run: flutter pub get
+        flutter-version: '2.x'
+        channel: 'any'
+    - run: dart pub global activate fvm
+    - run: fvm install
+    - run: fvm flutter pub get
 
     - name: Restore Firebase Settings
       run: echo -n "${{ secrets.LIB_FIREBASE_OPTIONS }}" | base64 -d > lib/firebase_options.dart
@@ -38,6 +40,6 @@ jobs:
         echo 'keyAlias=upload' >> android/key.properties
         cat android/key.properties
 
-    - run: flutter test
-    - run: flutter build apk --flavor production
-    - run: flutter build appbundle --flavor production
+    - run: fvm flutter test
+    - run: fvm flutter build apk --flavor production
+    - run: fvm flutter build appbundle --flavor production
