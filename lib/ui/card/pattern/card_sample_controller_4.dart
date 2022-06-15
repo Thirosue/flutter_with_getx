@@ -110,8 +110,12 @@ List<GestureDetector> _cards({
 
 class CardSampleController4 extends GetxController
     with GetSingleTickerProviderStateMixin {
+  final BuildContext context;
   final CardRepository repository;
-  CardSampleController4(this.repository);
+  CardSampleController4({
+    required this.context,
+    required this.repository,
+  });
 
   late AnimationController controller =
       AnimationController(duration: duration, vsync: this);

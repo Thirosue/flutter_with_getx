@@ -5,11 +5,15 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 
 class CardSamplePage4 extends StatelessWidget {
-  CardSamplePage4({Key? key}) : super(key: key);
-  final controller = Get.put(CardSampleController4(CardRepository()));
+  const CardSamplePage4({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CardSampleController4(
+      repository: CardRepository(),
+      context: context,
+    ));
+
     return Scaffold(
       appBar: AppBar(
         title: Obx(
