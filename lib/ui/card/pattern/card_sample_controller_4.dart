@@ -22,19 +22,6 @@ final cardBackgrounds = [
   SolidColorCardBackground(Colors.purple),
 ];
 
-const _alignments = [
-  Alignment(-4.5, 0.5),
-  Alignment(-4, 0.4),
-  Alignment(-3.5, 0.3),
-  Alignment(-3, 0.2),
-  Alignment(0, -0.4),
-  Alignment(4, 0.35),
-  Alignment(4.5, 0.4),
-  Alignment(5, 0.45),
-  Alignment(5.5, 0.5),
-  Alignment(6, 0.55),
-];
-
 double _angle(int index) {
   if (index < 4) {
     return -110 * pi / 180;
@@ -42,6 +29,26 @@ double _angle(int index) {
     return 90 * pi / 180;
   } else {
     return 110 * pi / 180;
+  }
+}
+
+// point
+// 300-350 5.5, 8
+// 350-400 4.5, 6
+// 400-450 3.5, 4
+// 450-500 2.5, 3
+List<double> _cardPosition(double point) {
+  if (point <= 350) {
+    // iphne SE
+    return [5.5, 8];
+  } else if (point <= 400) {
+    // iphne8, iphone 13 (mini)
+    return [4.5, 6];
+  } else if (point <= 450) {
+    // iphne11, iphone 13 Pro Max
+    return [3.5, 4];
+  } else {
+    return [2.5, 3];
   }
 }
 
@@ -130,6 +137,26 @@ class CardSampleController4 extends GetxController
   @override
   void onInit() async {
     super.onInit();
+
+    final deviceWidth = MediaQuery.of(context).size.width;
+    debugPrint(deviceWidth.toString());
+    const unit = 0.5;
+    final left = _cardPosition(deviceWidth)[0];
+    final right = _cardPosition(deviceWidth)[1];
+
+    List<Alignment> alignments = [
+      Alignment(-left, 0.5),
+      Alignment(-left + unit, 0.4),
+      Alignment(-left + unit * 2, 0.3),
+      Alignment(-left + unit * 3, 0.2),
+      const Alignment(0, -0.4),
+      Alignment(right - unit * 4, 0.35),
+      Alignment(right - unit * 3, 0.4),
+      Alignment(right - unit * 2, 0.45),
+      Alignment(right - unit, 0.5),
+      Alignment(right, 0.55),
+    ];
+
     cardList = await findAll();
     size = cardList.length;
 
@@ -141,8 +168,8 @@ class CardSampleController4 extends GetxController
               )
               .drive(
                 AlignmentTween(
-                  begin: _alignments[(index.value + i) % 10],
-                  end: _alignments[(index.value + i + 1) % 10],
+                  begin: alignments[(index.value + i) % 10],
+                  end: alignments[(index.value + i + 1) % 10],
                 ),
               ),
         )
@@ -156,8 +183,8 @@ class CardSampleController4 extends GetxController
               )
               .drive(
                 AlignmentTween(
-                  begin: _alignments[(index.value + i) % 10],
-                  end: _alignments[(index.value + i - 1) % 10],
+                  begin: alignments[(index.value + i) % 10],
+                  end: alignments[(index.value + i - 1) % 10],
                 ),
               ),
         )
