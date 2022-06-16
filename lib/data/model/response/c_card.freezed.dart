@@ -12,40 +12,11 @@ part of 'c_card.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 CCard _$CCardFromJson(Map<String, dynamic> json) {
   return _CCard.fromJson(json);
 }
-
-/// @nodoc
-class _$CCardTearOff {
-  const _$CCardTearOff();
-
-  _CCard call(
-      {required int id,
-      String? type,
-      String? name,
-      String? cardNumber,
-      String? campany,
-      Validity? validity}) {
-    return _CCard(
-      id: id,
-      type: type,
-      name: name,
-      cardNumber: cardNumber,
-      campany: campany,
-      validity: validity,
-    );
-  }
-
-  CCard fromJson(Map<String, Object?> json) {
-    return CCard.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $CCard = _$CCardTearOff();
 
 /// @nodoc
 mixin _$CCard {
@@ -134,9 +105,9 @@ class _$CCardCopyWithImpl<$Res> implements $CCardCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$CCardCopyWith<$Res> implements $CCardCopyWith<$Res> {
-  factory _$CCardCopyWith(_CCard value, $Res Function(_CCard) then) =
-      __$CCardCopyWithImpl<$Res>;
+abstract class _$$_CCardCopyWith<$Res> implements $CCardCopyWith<$Res> {
+  factory _$$_CCardCopyWith(_$_CCard value, $Res Function(_$_CCard) then) =
+      __$$_CCardCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
@@ -151,13 +122,13 @@ abstract class _$CCardCopyWith<$Res> implements $CCardCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$CCardCopyWithImpl<$Res> extends _$CCardCopyWithImpl<$Res>
-    implements _$CCardCopyWith<$Res> {
-  __$CCardCopyWithImpl(_CCard _value, $Res Function(_CCard) _then)
-      : super(_value, (v) => _then(v as _CCard));
+class __$$_CCardCopyWithImpl<$Res> extends _$CCardCopyWithImpl<$Res>
+    implements _$$_CCardCopyWith<$Res> {
+  __$$_CCardCopyWithImpl(_$_CCard _value, $Res Function(_$_CCard) _then)
+      : super(_value, (v) => _then(v as _$_CCard));
 
   @override
-  _CCard get _value => super._value as _CCard;
+  _$_CCard get _value => super._value as _$_CCard;
 
   @override
   $Res call({
@@ -168,7 +139,7 @@ class __$CCardCopyWithImpl<$Res> extends _$CCardCopyWithImpl<$Res>
     Object? campany = freezed,
     Object? validity = freezed,
   }) {
-    return _then(_CCard(
+    return _then(_$_CCard(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -246,7 +217,7 @@ class _$_CCard with DiagnosticableTreeMixin implements _CCard {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _CCard &&
+            other is _$_CCard &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.name, name) &&
@@ -256,6 +227,7 @@ class _$_CCard with DiagnosticableTreeMixin implements _CCard {
             const DeepCollectionEquality().equals(other.validity, validity));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -268,8 +240,8 @@ class _$_CCard with DiagnosticableTreeMixin implements _CCard {
 
   @JsonKey(ignore: true)
   @override
-  _$CCardCopyWith<_CCard> get copyWith =>
-      __$CCardCopyWithImpl<_CCard>(this, _$identity);
+  _$$_CCardCopyWith<_$_CCard> get copyWith =>
+      __$$_CCardCopyWithImpl<_$_CCard>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -279,54 +251,36 @@ class _$_CCard with DiagnosticableTreeMixin implements _CCard {
 
 abstract class _CCard implements CCard {
   const factory _CCard(
-      {required int id,
-      String? type,
-      String? name,
-      String? cardNumber,
-      String? campany,
-      Validity? validity}) = _$_CCard;
+      {required final int id,
+      final String? type,
+      final String? name,
+      final String? cardNumber,
+      final String? campany,
+      final Validity? validity}) = _$_CCard;
 
   factory _CCard.fromJson(Map<String, dynamic> json) = _$_CCard.fromJson;
 
   @override
-  int get id;
+  int get id => throw _privateConstructorUsedError;
   @override
-  String? get type;
+  String? get type => throw _privateConstructorUsedError;
   @override
-  String? get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  String? get cardNumber;
+  String? get cardNumber => throw _privateConstructorUsedError;
   @override
-  String? get campany;
+  String? get campany => throw _privateConstructorUsedError;
   @override
-  Validity? get validity;
+  Validity? get validity => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$CCardCopyWith<_CCard> get copyWith => throw _privateConstructorUsedError;
+  _$$_CCardCopyWith<_$_CCard> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 Validity _$ValidityFromJson(Map<String, dynamic> json) {
   return _Validity.fromJson(json);
 }
-
-/// @nodoc
-class _$ValidityTearOff {
-  const _$ValidityTearOff();
-
-  _Validity call({required int validThruMonth, required int validThruYear}) {
-    return _Validity(
-      validThruMonth: validThruMonth,
-      validThruYear: validThruYear,
-    );
-  }
-
-  Validity fromJson(Map<String, Object?> json) {
-    return Validity.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Validity = _$ValidityTearOff();
 
 /// @nodoc
 mixin _$Validity {
@@ -373,28 +327,30 @@ class _$ValidityCopyWithImpl<$Res> implements $ValidityCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ValidityCopyWith<$Res> implements $ValidityCopyWith<$Res> {
-  factory _$ValidityCopyWith(_Validity value, $Res Function(_Validity) then) =
-      __$ValidityCopyWithImpl<$Res>;
+abstract class _$$_ValidityCopyWith<$Res> implements $ValidityCopyWith<$Res> {
+  factory _$$_ValidityCopyWith(
+          _$_Validity value, $Res Function(_$_Validity) then) =
+      __$$_ValidityCopyWithImpl<$Res>;
   @override
   $Res call({int validThruMonth, int validThruYear});
 }
 
 /// @nodoc
-class __$ValidityCopyWithImpl<$Res> extends _$ValidityCopyWithImpl<$Res>
-    implements _$ValidityCopyWith<$Res> {
-  __$ValidityCopyWithImpl(_Validity _value, $Res Function(_Validity) _then)
-      : super(_value, (v) => _then(v as _Validity));
+class __$$_ValidityCopyWithImpl<$Res> extends _$ValidityCopyWithImpl<$Res>
+    implements _$$_ValidityCopyWith<$Res> {
+  __$$_ValidityCopyWithImpl(
+      _$_Validity _value, $Res Function(_$_Validity) _then)
+      : super(_value, (v) => _then(v as _$_Validity));
 
   @override
-  _Validity get _value => super._value as _Validity;
+  _$_Validity get _value => super._value as _$_Validity;
 
   @override
   $Res call({
     Object? validThruMonth = freezed,
     Object? validThruYear = freezed,
   }) {
-    return _then(_Validity(
+    return _then(_$_Validity(
       validThruMonth: validThruMonth == freezed
           ? _value.validThruMonth
           : validThruMonth // ignore: cast_nullable_to_non_nullable
@@ -439,13 +395,14 @@ class _$_Validity with DiagnosticableTreeMixin implements _Validity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Validity &&
+            other is _$_Validity &&
             const DeepCollectionEquality()
                 .equals(other.validThruMonth, validThruMonth) &&
             const DeepCollectionEquality()
                 .equals(other.validThruYear, validThruYear));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -454,8 +411,8 @@ class _$_Validity with DiagnosticableTreeMixin implements _Validity {
 
   @JsonKey(ignore: true)
   @override
-  _$ValidityCopyWith<_Validity> get copyWith =>
-      __$ValidityCopyWithImpl<_Validity>(this, _$identity);
+  _$$_ValidityCopyWith<_$_Validity> get copyWith =>
+      __$$_ValidityCopyWithImpl<_$_Validity>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -465,16 +422,17 @@ class _$_Validity with DiagnosticableTreeMixin implements _Validity {
 
 abstract class _Validity implements Validity {
   const factory _Validity(
-      {required int validThruMonth, required int validThruYear}) = _$_Validity;
+      {required final int validThruMonth,
+      required final int validThruYear}) = _$_Validity;
 
   factory _Validity.fromJson(Map<String, dynamic> json) = _$_Validity.fromJson;
 
   @override
-  int get validThruMonth;
+  int get validThruMonth => throw _privateConstructorUsedError;
   @override
-  int get validThruYear;
+  int get validThruYear => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ValidityCopyWith<_Validity> get copyWith =>
+  _$$_ValidityCopyWith<_$_Validity> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_with_getx/data/const/validate_messages.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
+import 'package:flutter_with_getx/data/repository/device_repository.dart';
 import 'package:flutter_with_getx/data/repository/state_repository.dart';
 import 'package:flutter_with_getx/ui/login/login_controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,10 +13,13 @@ class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormBuilderState>();
 
-  final controller = Get.put(LoginController(
-    AuthRepository(),
-    StateRepository(),
-  ));
+  final controller = Get.put(
+    LoginController(
+      AuthRepository(),
+      StateRepository(),
+      DeviceRepository(),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {

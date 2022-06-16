@@ -1,11 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_with_getx/component/templates/custom_theme.dart';
+import 'package:flutter_with_getx/data/const/const.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
+import 'package:flutter_with_getx/data/model/device/device.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
+import 'package:flutter_with_getx/data/repository/device_repository.dart';
 import 'package:flutter_with_getx/data/repository/state_repository.dart';
 import 'package:flutter_with_getx/firebase_options.dart';
 import 'package:flutter_with_getx/ui/card/card_page.dart';
@@ -22,15 +26,38 @@ import 'package:flutter_with_getx/ui/user/user_page.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(LocalStateAdapter());
-  await Hive.openBox<LocalState>('state');
+  await Hive.openBox(Const.storeKey);
+  // clear storage
+  // final box = await Hive.openBox(Const.storeKey);
+  // box.deleteAll(box.keys);
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  const isRelease = bool.fromEnvironment('dart.vm.product');
+  if (!isRelease) {
+    FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+  }
+
+  final messaging = FirebaseMessaging.instance;
+  await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  final token = await messaging.getToken();
+  debugPrint('🐯 FCM TOKEN: $token');
+  DeviceRepository().save(Device(token: token!));
 
   runApp(const MyApp());
 }
@@ -58,7 +85,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: const [
         FormBuilderLocalizations.delegate,
       ],
-      initialRoute: Path.index,
+      initialRoute: Path.login,
       getPages: [
         GetPage(name: Path.login, page: () => LoginPage()),
         GetPage(name: Path.index, page: () => IndexPage()),

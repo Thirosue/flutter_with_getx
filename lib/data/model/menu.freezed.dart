@@ -12,28 +12,7 @@ part of 'menu.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$MenuTearOff {
-  const _$MenuTearOff();
-
-  _Menu call(
-      {required String title,
-      required String path,
-      required IconData icon,
-      required int index}) {
-    return _Menu(
-      title: title,
-      path: path,
-      icon: icon,
-      index: index,
-    );
-  }
-}
-
-/// @nodoc
-const $Menu = _$MenuTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Menu {
@@ -90,21 +69,21 @@ class _$MenuCopyWithImpl<$Res> implements $MenuCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$MenuCopyWith<$Res> implements $MenuCopyWith<$Res> {
-  factory _$MenuCopyWith(_Menu value, $Res Function(_Menu) then) =
-      __$MenuCopyWithImpl<$Res>;
+abstract class _$$_MenuCopyWith<$Res> implements $MenuCopyWith<$Res> {
+  factory _$$_MenuCopyWith(_$_Menu value, $Res Function(_$_Menu) then) =
+      __$$_MenuCopyWithImpl<$Res>;
   @override
   $Res call({String title, String path, IconData icon, int index});
 }
 
 /// @nodoc
-class __$MenuCopyWithImpl<$Res> extends _$MenuCopyWithImpl<$Res>
-    implements _$MenuCopyWith<$Res> {
-  __$MenuCopyWithImpl(_Menu _value, $Res Function(_Menu) _then)
-      : super(_value, (v) => _then(v as _Menu));
+class __$$_MenuCopyWithImpl<$Res> extends _$MenuCopyWithImpl<$Res>
+    implements _$$_MenuCopyWith<$Res> {
+  __$$_MenuCopyWithImpl(_$_Menu _value, $Res Function(_$_Menu) _then)
+      : super(_value, (v) => _then(v as _$_Menu));
 
   @override
-  _Menu get _value => super._value as _Menu;
+  _$_Menu get _value => super._value as _$_Menu;
 
   @override
   $Res call({
@@ -113,7 +92,7 @@ class __$MenuCopyWithImpl<$Res> extends _$MenuCopyWithImpl<$Res>
     Object? icon = freezed,
     Object? index = freezed,
   }) {
-    return _then(_Menu(
+    return _then(_$_Menu(
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -172,7 +151,7 @@ class _$_Menu with DiagnosticableTreeMixin implements _Menu {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Menu &&
+            other is _$_Menu &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.path, path) &&
             const DeepCollectionEquality().equals(other.icon, icon) &&
@@ -189,26 +168,26 @@ class _$_Menu with DiagnosticableTreeMixin implements _Menu {
 
   @JsonKey(ignore: true)
   @override
-  _$MenuCopyWith<_Menu> get copyWith =>
-      __$MenuCopyWithImpl<_Menu>(this, _$identity);
+  _$$_MenuCopyWith<_$_Menu> get copyWith =>
+      __$$_MenuCopyWithImpl<_$_Menu>(this, _$identity);
 }
 
 abstract class _Menu implements Menu {
   const factory _Menu(
-      {required String title,
-      required String path,
-      required IconData icon,
-      required int index}) = _$_Menu;
+      {required final String title,
+      required final String path,
+      required final IconData icon,
+      required final int index}) = _$_Menu;
 
   @override
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @override
-  String get path;
+  String get path => throw _privateConstructorUsedError;
   @override
-  IconData get icon;
+  IconData get icon => throw _privateConstructorUsedError;
   @override
-  int get index;
+  int get index => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$MenuCopyWith<_Menu> get copyWith => throw _privateConstructorUsedError;
+  _$$_MenuCopyWith<_$_Menu> get copyWith => throw _privateConstructorUsedError;
 }

@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
+import 'package:flutter_with_getx/data/model/device/device.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
 import 'package:flutter_with_getx/data/repository/state_repository.dart';
@@ -13,6 +14,8 @@ import '../../dummy/dummy_page.dart';
 import '../../dummy/dummy_response.dart';
 import 'login_controller_test.mocks.dart';
 
+var fcmToken =
+    'dpcE8qdHjEZKtl3-EvK-EY:APA91bH3LllTX0GgR_Q5plrJT6wXgGFaoq-06FrqFUEgg-pNvHcsxR_o4Q76eswTnX7iHFPh8u2JBjzPav6AuecKZr7-_K3MQ9lXc5tWhQSYJpYBXz-L_dGKhMo-9p96gd_lsiikoS0M';
 var token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 var state = LocalState(
@@ -20,6 +23,9 @@ var state = LocalState(
   idToken: token,
   refreshToken: token,
   accessToken: token,
+);
+var device = Device(
+  token: fcmToken,
 );
 
 @GenerateMocks([
@@ -41,7 +47,9 @@ void main() async {
       // given
       when(mockAuthRepository.refresh())
           .thenAnswer((_) => Future.value(response));
-      when(mockStateAuthRepository.write(state)).thenReturn(null);
+      when(mockStateAuthRepository.write(state))
+          .thenAnswer((_) => Future<void>.value());
+      when(mockStateAuthRepository.read()).thenReturn(state);
 
       // when
       final result = await target.refreshToken();
@@ -57,7 +65,8 @@ void main() async {
     test('認証APIで例外が発生したとき、トークンリフレッシュ結果が false となること', () async {
       // given
       when(mockAuthRepository.refresh()).thenThrow(Exception('api error'));
-      when(mockStateAuthRepository.write(state)).thenReturn(null);
+      when(mockStateAuthRepository.write(state))
+          .thenAnswer((_) => Future<void>.value());
 
       // when
       final result = await target.refreshToken();
@@ -89,7 +98,6 @@ void main() async {
         await tester.pumpAndSettle();
 
         // then
-        verify(mockStateAuthRepository.read()).called(1);
         verifyNever(mockAuthRepository.refresh());
         // テスト容易性が低いため、リダイレクトしないことの検証はスキップする
       });
@@ -116,7 +124,8 @@ void main() async {
           ),
         );
         when(mockStateAuthRepository.read()).thenReturn(state);
-        when(mockStateAuthRepository.write(state)).thenReturn(null);
+        when(mockStateAuthRepository.write(state))
+            .thenAnswer((_) => Future<void>.value());
         when(mockAuthRepository.refresh())
             .thenAnswer((_) => Future.value(response));
         expect(find.byWidget(loginPage), findsOneWidget);

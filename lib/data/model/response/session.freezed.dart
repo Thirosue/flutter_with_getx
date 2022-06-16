@@ -12,48 +12,11 @@ part of 'session.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Session _$SessionFromJson(Map<String, dynamic> json) {
   return _Session.fromJson(json);
 }
-
-/// @nodoc
-class _$SessionTearOff {
-  const _$SessionTearOff();
-
-  _Session call(
-      {required String id,
-      @JsonKey(name: 'first_name') String? firstName,
-      @JsonKey(name: 'last_name') String? lastName,
-      String? email,
-      String? tel,
-      List<String>? roles,
-      @JsonKey(name: 'permission_key_list') List<String>? permissionKeyList,
-      String? idToken,
-      String? refreshToken,
-      String? accessToken}) {
-    return _Session(
-      id: id,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      tel: tel,
-      roles: roles,
-      permissionKeyList: permissionKeyList,
-      idToken: idToken,
-      refreshToken: refreshToken,
-      accessToken: accessToken,
-    );
-  }
-
-  Session fromJson(Map<String, Object?> json) {
-    return Session.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Session = _$SessionTearOff();
 
 /// @nodoc
 mixin _$Session {
@@ -160,9 +123,10 @@ class _$SessionCopyWithImpl<$Res> implements $SessionCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SessionCopyWith<$Res> implements $SessionCopyWith<$Res> {
-  factory _$SessionCopyWith(_Session value, $Res Function(_Session) then) =
-      __$SessionCopyWithImpl<$Res>;
+abstract class _$$_SessionCopyWith<$Res> implements $SessionCopyWith<$Res> {
+  factory _$$_SessionCopyWith(
+          _$_Session value, $Res Function(_$_Session) then) =
+      __$$_SessionCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -178,13 +142,13 @@ abstract class _$SessionCopyWith<$Res> implements $SessionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$SessionCopyWithImpl<$Res> extends _$SessionCopyWithImpl<$Res>
-    implements _$SessionCopyWith<$Res> {
-  __$SessionCopyWithImpl(_Session _value, $Res Function(_Session) _then)
-      : super(_value, (v) => _then(v as _Session));
+class __$$_SessionCopyWithImpl<$Res> extends _$SessionCopyWithImpl<$Res>
+    implements _$$_SessionCopyWith<$Res> {
+  __$$_SessionCopyWithImpl(_$_Session _value, $Res Function(_$_Session) _then)
+      : super(_value, (v) => _then(v as _$_Session));
 
   @override
-  _Session get _value => super._value as _Session;
+  _$_Session get _value => super._value as _$_Session;
 
   @override
   $Res call({
@@ -199,7 +163,7 @@ class __$SessionCopyWithImpl<$Res> extends _$SessionCopyWithImpl<$Res>
     Object? refreshToken = freezed,
     Object? accessToken = freezed,
   }) {
-    return _then(_Session(
+    return _then(_$_Session(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -221,11 +185,11 @@ class __$SessionCopyWithImpl<$Res> extends _$SessionCopyWithImpl<$Res>
           : tel // ignore: cast_nullable_to_non_nullable
               as String?,
       roles: roles == freezed
-          ? _value.roles
+          ? _value._roles
           : roles // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       permissionKeyList: permissionKeyList == freezed
-          ? _value.permissionKeyList
+          ? _value._permissionKeyList
           : permissionKeyList // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       idToken: idToken == freezed
@@ -249,15 +213,20 @@ class __$SessionCopyWithImpl<$Res> extends _$SessionCopyWithImpl<$Res>
 class _$_Session with DiagnosticableTreeMixin implements _Session {
   const _$_Session(
       {required this.id,
-      @JsonKey(name: 'first_name') this.firstName,
-      @JsonKey(name: 'last_name') this.lastName,
+      @JsonKey(name: 'first_name')
+          this.firstName,
+      @JsonKey(name: 'last_name')
+          this.lastName,
       this.email,
       this.tel,
-      this.roles,
-      @JsonKey(name: 'permission_key_list') this.permissionKeyList,
+      final List<String>? roles,
+      @JsonKey(name: 'permission_key_list')
+          final List<String>? permissionKeyList,
       this.idToken,
       this.refreshToken,
-      this.accessToken});
+      this.accessToken})
+      : _roles = roles,
+        _permissionKeyList = permissionKeyList;
 
   factory _$_Session.fromJson(Map<String, dynamic> json) =>
       _$$_SessionFromJson(json);
@@ -274,11 +243,25 @@ class _$_Session with DiagnosticableTreeMixin implements _Session {
   final String? email;
   @override
   final String? tel;
+  final List<String>? _roles;
   @override
-  final List<String>? roles;
+  List<String>? get roles {
+    final value = _roles;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<String>? _permissionKeyList;
   @override
   @JsonKey(name: 'permission_key_list')
-  final List<String>? permissionKeyList;
+  List<String>? get permissionKeyList {
+    final value = _permissionKeyList;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String? idToken;
   @override
@@ -312,15 +295,15 @@ class _$_Session with DiagnosticableTreeMixin implements _Session {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Session &&
+            other is _$_Session &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.tel, tel) &&
-            const DeepCollectionEquality().equals(other.roles, roles) &&
+            const DeepCollectionEquality().equals(other._roles, _roles) &&
             const DeepCollectionEquality()
-                .equals(other.permissionKeyList, permissionKeyList) &&
+                .equals(other._permissionKeyList, _permissionKeyList) &&
             const DeepCollectionEquality().equals(other.idToken, idToken) &&
             const DeepCollectionEquality()
                 .equals(other.refreshToken, refreshToken) &&
@@ -328,6 +311,7 @@ class _$_Session with DiagnosticableTreeMixin implements _Session {
                 .equals(other.accessToken, accessToken));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -336,16 +320,16 @@ class _$_Session with DiagnosticableTreeMixin implements _Session {
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(tel),
-      const DeepCollectionEquality().hash(roles),
-      const DeepCollectionEquality().hash(permissionKeyList),
+      const DeepCollectionEquality().hash(_roles),
+      const DeepCollectionEquality().hash(_permissionKeyList),
       const DeepCollectionEquality().hash(idToken),
       const DeepCollectionEquality().hash(refreshToken),
       const DeepCollectionEquality().hash(accessToken));
 
   @JsonKey(ignore: true)
   @override
-  _$SessionCopyWith<_Session> get copyWith =>
-      __$SessionCopyWithImpl<_Session>(this, _$identity);
+  _$$_SessionCopyWith<_$_Session> get copyWith =>
+      __$$_SessionCopyWithImpl<_$_Session>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -355,44 +339,47 @@ class _$_Session with DiagnosticableTreeMixin implements _Session {
 
 abstract class _Session implements Session {
   const factory _Session(
-      {required String id,
-      @JsonKey(name: 'first_name') String? firstName,
-      @JsonKey(name: 'last_name') String? lastName,
-      String? email,
-      String? tel,
-      List<String>? roles,
-      @JsonKey(name: 'permission_key_list') List<String>? permissionKeyList,
-      String? idToken,
-      String? refreshToken,
-      String? accessToken}) = _$_Session;
+      {required final String id,
+      @JsonKey(name: 'first_name')
+          final String? firstName,
+      @JsonKey(name: 'last_name')
+          final String? lastName,
+      final String? email,
+      final String? tel,
+      final List<String>? roles,
+      @JsonKey(name: 'permission_key_list')
+          final List<String>? permissionKeyList,
+      final String? idToken,
+      final String? refreshToken,
+      final String? accessToken}) = _$_Session;
 
   factory _Session.fromJson(Map<String, dynamic> json) = _$_Session.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'first_name')
-  String? get firstName;
+  String? get firstName => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'last_name')
-  String? get lastName;
+  String? get lastName => throw _privateConstructorUsedError;
   @override
-  String? get email;
+  String? get email => throw _privateConstructorUsedError;
   @override
-  String? get tel;
+  String? get tel => throw _privateConstructorUsedError;
   @override
-  List<String>? get roles;
+  List<String>? get roles => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'permission_key_list')
-  List<String>? get permissionKeyList;
+  List<String>? get permissionKeyList => throw _privateConstructorUsedError;
   @override
-  String? get idToken;
+  String? get idToken => throw _privateConstructorUsedError;
   @override
-  String? get refreshToken;
+  String? get refreshToken => throw _privateConstructorUsedError;
   @override
-  String? get accessToken;
+  String? get accessToken => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SessionCopyWith<_Session> get copyWith =>
+  _$$_SessionCopyWith<_$_Session> get copyWith =>
       throw _privateConstructorUsedError;
 }

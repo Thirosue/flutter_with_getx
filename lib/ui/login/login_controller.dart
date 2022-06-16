@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_with_getx/data/model/response/session.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
+import 'package:flutter_with_getx/data/repository/device_repository.dart';
 import 'package:flutter_with_getx/data/repository/state_repository.dart';
 import 'package:flutter_with_getx/helpers/wait.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ enum FormStatus { idle, loading, error, success }
 class LoginController extends GetxController {
   final AuthRepository authRepository;
   final StateRepository stateRepository;
+  final DeviceRepository deviceRepository;
   final message = ''.obs;
   final status = (FormStatus.idle).obs;
   final showPassword = false.obs;
@@ -18,7 +20,11 @@ class LoginController extends GetxController {
   final email = ''.obs;
   final password = ''.obs;
 
-  LoginController(this.authRepository, this.stateRepository);
+  LoginController(
+    this.authRepository,
+    this.stateRepository,
+    this.deviceRepository,
+  );
 
   @override
   void onInit() {
@@ -47,8 +53,14 @@ class LoginController extends GetxController {
       refreshToken: session.refreshToken,
       accessToken: session.accessToken,
     );
+    // final device = deviceRepository.read();
     stateRepository.write(state);
-    // final hoge = Hive.box<LocalState>('state').getAt(0);
+    // deviceRepository.save(
+    //   Device(
+    //     email: email.value,
+    //     token: device.token,
+    //   ),
+    // );
     debugPrint(state.toString());
 
     message.value = 'OK. Loading screen...';
