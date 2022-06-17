@@ -19,6 +19,7 @@ var fcmToken =
 var token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 var state = LocalState(
+  token: fcmToken,
   name: 'john doe',
   idToken: token,
   refreshToken: token,
@@ -47,7 +48,7 @@ void main() async {
       // given
       when(mockAuthRepository.refresh())
           .thenAnswer((_) => Future.value(response));
-      when(mockStateAuthRepository.write(state))
+      when(mockStateAuthRepository.save(state))
           .thenAnswer((_) => Future<void>.value());
       when(mockStateAuthRepository.read()).thenReturn(state);
 
@@ -58,14 +59,14 @@ void main() async {
       expect(result, true);
       verifyInOrder([
         mockAuthRepository.refresh(),
-        mockStateAuthRepository.write(state),
+        mockStateAuthRepository.save(state),
       ]);
     });
 
     test('認証APIで例外が発生したとき、トークンリフレッシュ結果が false となること', () async {
       // given
       when(mockAuthRepository.refresh()).thenThrow(Exception('api error'));
-      when(mockStateAuthRepository.write(state))
+      when(mockStateAuthRepository.save(state))
           .thenAnswer((_) => Future<void>.value());
 
       // when
@@ -74,7 +75,7 @@ void main() async {
       // then
       expect(result, false);
       verify(mockAuthRepository.refresh()).called(1);
-      verifyNever(mockStateAuthRepository.write(state));
+      verifyNever(mockStateAuthRepository.save(state));
     });
 
     test('ストレージ書き込みで例外が発生したとき、トークンリフレッシュ結果が false となること', () async {
@@ -88,7 +89,7 @@ void main() async {
       testWidgets('アプリを利用したことがない場合、ログインページからスタートすること', (tester) async {
         // given
         when(mockStateAuthRepository.read())
-            .thenReturn(const LocalState(name: 'unknown'));
+            .thenReturn(const LocalState(token: 'dummy'));
 
         // when
         target.redirect(Path.index);
@@ -124,7 +125,7 @@ void main() async {
           ),
         );
         when(mockStateAuthRepository.read()).thenReturn(state);
-        when(mockStateAuthRepository.write(state))
+        when(mockStateAuthRepository.save(state))
             .thenAnswer((_) => Future<void>.value());
         when(mockAuthRepository.refresh())
             .thenAnswer((_) => Future.value(response));
@@ -142,7 +143,7 @@ void main() async {
         verifyInOrder([
           mockStateAuthRepository.read(),
           mockAuthRepository.refresh(),
-          mockStateAuthRepository.write(state),
+          mockStateAuthRepository.save(state),
         ]);
       });
 
@@ -166,7 +167,7 @@ void main() async {
           mockStateAuthRepository.read(),
           mockAuthRepository.refresh(),
         ]);
-        verifyNever(mockStateAuthRepository.write(state));
+        verifyNever(mockStateAuthRepository.save(state));
         // テスト容易性が低いため、リダイレクトしないことの検証はスキップする
       });
     });

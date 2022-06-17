@@ -19,13 +19,15 @@ class LoginMiddleWare extends GetMiddleware {
       final results = await auth.refresh();
       final session = Session.toList(results.data!).first;
 
+      final store = state.read();
       final value = LocalState(
+        token: store.token,
         name: '${session.firstName} ${session.lastName}',
         idToken: session.idToken,
         refreshToken: session.refreshToken,
         accessToken: session.accessToken,
       );
-      state.write(value);
+      state.save(value);
 
       return true;
     } on Exception catch (e) {

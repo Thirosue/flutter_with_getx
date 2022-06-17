@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_with_getx/data/model/device/device.dart';
 import 'package:flutter_with_getx/data/model/response/session.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
 import 'package:flutter_with_getx/data/repository/auth_repository.dart';
@@ -47,20 +48,17 @@ class LoginController extends GetxController {
     debugPrint(results.toString());
 
     final session = Session.toList(results.data!).first;
+
+    final store = stateRepository.read();
     final state = LocalState(
+      token: store.token,
       name: '${session.firstName} ${session.lastName}',
       idToken: session.idToken,
       refreshToken: session.refreshToken,
       accessToken: session.accessToken,
     );
-    // final device = deviceRepository.read();
-    stateRepository.write(state);
-    // deviceRepository.save(
-    //   Device(
-    //     email: email.value,
-    //     token: device.token,
-    //   ),
-    // );
+    stateRepository.save(state);
+    deviceRepository.save(Device(token: store.token, email: email.value));
     debugPrint(state.toString());
 
     message.value = 'OK. Loading screen...';

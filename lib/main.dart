@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_with_getx/component/templates/custom_theme.dart';
-import 'package:flutter_with_getx/data/const/const.dart';
+import 'package:flutter_with_getx/data/const/state_key.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/data/model/device/device.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
@@ -25,16 +25,11 @@ import 'package:flutter_with_getx/ui/settings/setting_page.dart';
 import 'package:flutter_with_getx/ui/user/user_page.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get_storage/get_storage.dart';
 
 void main() async {
-  await Hive.initFlutter();
-  Hive.registerAdapter(LocalStateAdapter());
-  await Hive.openBox(Const.storeKey);
-  // clear storage
-  // final box = await Hive.openBox(Const.storeKey);
-  // box.deleteAll(box.keys);
+  await GetStorage.init();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -57,7 +52,8 @@ void main() async {
 
   final token = await messaging.getToken();
   debugPrint('🐯 FCM TOKEN: $token');
-  DeviceRepository().save(Device(token: token!));
+  StateRepository().save(LocalState(token: token!));
+  DeviceRepository().save(Device(token: token));
 
   runApp(const MyApp());
 }

@@ -17,6 +17,7 @@ var fcmToken =
 var token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 var state = LocalState(
+  token: fcmToken,
   name: 'john doe',
   idToken: token,
   refreshToken: token,
@@ -43,7 +44,7 @@ void main() async {
       when(mock.auth(email: '', password: ''))
           .thenAnswer((_) => Future.value(response));
       when(stateMock.read()).thenReturn(state);
-      when(stateMock.write(state)).thenAnswer((_) => Future<void>.value());
+      when(stateMock.save(state)).thenAnswer((_) => Future<void>.value());
       when(deviceMock.save(device)).thenAnswer((_) => Future<void>.value());
 
       var model = LoginController(

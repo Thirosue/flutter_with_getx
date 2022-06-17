@@ -12,50 +12,19 @@ part of 'local_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 LocalState _$LocalStateFromJson(Map<String, dynamic> json) {
   return _LocalState.fromJson(json);
 }
 
 /// @nodoc
-class _$LocalStateTearOff {
-  const _$LocalStateTearOff();
-
-  _LocalState call(
-      {@HiveField(0) required String name,
-      @HiveField(1) List<String>? roles,
-      @HiveField(2) String? idToken,
-      @HiveField(3) String? refreshToken,
-      @HiveField(4) String? accessToken}) {
-    return _LocalState(
-      name: name,
-      roles: roles,
-      idToken: idToken,
-      refreshToken: refreshToken,
-      accessToken: accessToken,
-    );
-  }
-
-  LocalState fromJson(Map<String, Object?> json) {
-    return LocalState.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $LocalState = _$LocalStateTearOff();
-
-/// @nodoc
 mixin _$LocalState {
-  @HiveField(0)
-  String get name => throw _privateConstructorUsedError;
-  @HiveField(1)
+  String get token => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   List<String>? get roles => throw _privateConstructorUsedError;
-  @HiveField(2)
   String? get idToken => throw _privateConstructorUsedError;
-  @HiveField(3)
   String? get refreshToken => throw _privateConstructorUsedError;
-  @HiveField(4)
   String? get accessToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -70,11 +39,12 @@ abstract class $LocalStateCopyWith<$Res> {
           LocalState value, $Res Function(LocalState) then) =
       _$LocalStateCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(0) String name,
-      @HiveField(1) List<String>? roles,
-      @HiveField(2) String? idToken,
-      @HiveField(3) String? refreshToken,
-      @HiveField(4) String? accessToken});
+      {String token,
+      String? name,
+      List<String>? roles,
+      String? idToken,
+      String? refreshToken,
+      String? accessToken});
 }
 
 /// @nodoc
@@ -87,6 +57,7 @@ class _$LocalStateCopyWithImpl<$Res> implements $LocalStateCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? token = freezed,
     Object? name = freezed,
     Object? roles = freezed,
     Object? idToken = freezed,
@@ -94,10 +65,14 @@ class _$LocalStateCopyWithImpl<$Res> implements $LocalStateCopyWith<$Res> {
     Object? accessToken = freezed,
   }) {
     return _then(_value.copyWith(
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       roles: roles == freezed
           ? _value.roles
           : roles // ignore: cast_nullable_to_non_nullable
@@ -119,44 +94,51 @@ class _$LocalStateCopyWithImpl<$Res> implements $LocalStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$LocalStateCopyWith<$Res> implements $LocalStateCopyWith<$Res> {
-  factory _$LocalStateCopyWith(
-          _LocalState value, $Res Function(_LocalState) then) =
-      __$LocalStateCopyWithImpl<$Res>;
+abstract class _$$_LocalStateCopyWith<$Res>
+    implements $LocalStateCopyWith<$Res> {
+  factory _$$_LocalStateCopyWith(
+          _$_LocalState value, $Res Function(_$_LocalState) then) =
+      __$$_LocalStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(0) String name,
-      @HiveField(1) List<String>? roles,
-      @HiveField(2) String? idToken,
-      @HiveField(3) String? refreshToken,
-      @HiveField(4) String? accessToken});
+      {String token,
+      String? name,
+      List<String>? roles,
+      String? idToken,
+      String? refreshToken,
+      String? accessToken});
 }
 
 /// @nodoc
-class __$LocalStateCopyWithImpl<$Res> extends _$LocalStateCopyWithImpl<$Res>
-    implements _$LocalStateCopyWith<$Res> {
-  __$LocalStateCopyWithImpl(
-      _LocalState _value, $Res Function(_LocalState) _then)
-      : super(_value, (v) => _then(v as _LocalState));
+class __$$_LocalStateCopyWithImpl<$Res> extends _$LocalStateCopyWithImpl<$Res>
+    implements _$$_LocalStateCopyWith<$Res> {
+  __$$_LocalStateCopyWithImpl(
+      _$_LocalState _value, $Res Function(_$_LocalState) _then)
+      : super(_value, (v) => _then(v as _$_LocalState));
 
   @override
-  _LocalState get _value => super._value as _LocalState;
+  _$_LocalState get _value => super._value as _$_LocalState;
 
   @override
   $Res call({
+    Object? token = freezed,
     Object? name = freezed,
     Object? roles = freezed,
     Object? idToken = freezed,
     Object? refreshToken = freezed,
     Object? accessToken = freezed,
   }) {
-    return _then(_LocalState(
+    return _then(_$_LocalState(
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       roles: roles == freezed
-          ? _value.roles
+          ? _value._roles
           : roles // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       idToken: idToken == freezed
@@ -177,37 +159,42 @@ class __$LocalStateCopyWithImpl<$Res> extends _$LocalStateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 0, adapterName: 'LocalStateAdapter')
 class _$_LocalState with DiagnosticableTreeMixin implements _LocalState {
   const _$_LocalState(
-      {@HiveField(0) required this.name,
-      @HiveField(1) this.roles,
-      @HiveField(2) this.idToken,
-      @HiveField(3) this.refreshToken,
-      @HiveField(4) this.accessToken});
+      {required this.token,
+      this.name,
+      final List<String>? roles,
+      this.idToken,
+      this.refreshToken,
+      this.accessToken})
+      : _roles = roles;
 
   factory _$_LocalState.fromJson(Map<String, dynamic> json) =>
       _$$_LocalStateFromJson(json);
 
   @override
-  @HiveField(0)
-  final String name;
+  final String token;
   @override
-  @HiveField(1)
-  final List<String>? roles;
+  final String? name;
+  final List<String>? _roles;
   @override
-  @HiveField(2)
+  List<String>? get roles {
+    final value = _roles;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
   final String? idToken;
   @override
-  @HiveField(3)
   final String? refreshToken;
   @override
-  @HiveField(4)
   final String? accessToken;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LocalState(name: $name, roles: $roles, idToken: $idToken, refreshToken: $refreshToken, accessToken: $accessToken)';
+    return 'LocalState(token: $token, name: $name, roles: $roles, idToken: $idToken, refreshToken: $refreshToken, accessToken: $accessToken)';
   }
 
   @override
@@ -215,6 +202,7 @@ class _$_LocalState with DiagnosticableTreeMixin implements _LocalState {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'LocalState'))
+      ..add(DiagnosticsProperty('token', token))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('roles', roles))
       ..add(DiagnosticsProperty('idToken', idToken))
@@ -226,9 +214,10 @@ class _$_LocalState with DiagnosticableTreeMixin implements _LocalState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LocalState &&
+            other is _$_LocalState &&
+            const DeepCollectionEquality().equals(other.token, token) &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.roles, roles) &&
+            const DeepCollectionEquality().equals(other._roles, _roles) &&
             const DeepCollectionEquality().equals(other.idToken, idToken) &&
             const DeepCollectionEquality()
                 .equals(other.refreshToken, refreshToken) &&
@@ -236,19 +225,21 @@ class _$_LocalState with DiagnosticableTreeMixin implements _LocalState {
                 .equals(other.accessToken, accessToken));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(token),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(roles),
+      const DeepCollectionEquality().hash(_roles),
       const DeepCollectionEquality().hash(idToken),
       const DeepCollectionEquality().hash(refreshToken),
       const DeepCollectionEquality().hash(accessToken));
 
   @JsonKey(ignore: true)
   @override
-  _$LocalStateCopyWith<_LocalState> get copyWith =>
-      __$LocalStateCopyWithImpl<_LocalState>(this, _$identity);
+  _$$_LocalStateCopyWith<_$_LocalState> get copyWith =>
+      __$$_LocalStateCopyWithImpl<_$_LocalState>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -258,32 +249,30 @@ class _$_LocalState with DiagnosticableTreeMixin implements _LocalState {
 
 abstract class _LocalState implements LocalState {
   const factory _LocalState(
-      {@HiveField(0) required String name,
-      @HiveField(1) List<String>? roles,
-      @HiveField(2) String? idToken,
-      @HiveField(3) String? refreshToken,
-      @HiveField(4) String? accessToken}) = _$_LocalState;
+      {required final String token,
+      final String? name,
+      final List<String>? roles,
+      final String? idToken,
+      final String? refreshToken,
+      final String? accessToken}) = _$_LocalState;
 
   factory _LocalState.fromJson(Map<String, dynamic> json) =
       _$_LocalState.fromJson;
 
   @override
-  @HiveField(0)
-  String get name;
+  String get token => throw _privateConstructorUsedError;
   @override
-  @HiveField(1)
-  List<String>? get roles;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  @HiveField(2)
-  String? get idToken;
+  List<String>? get roles => throw _privateConstructorUsedError;
   @override
-  @HiveField(3)
-  String? get refreshToken;
+  String? get idToken => throw _privateConstructorUsedError;
   @override
-  @HiveField(4)
-  String? get accessToken;
+  String? get refreshToken => throw _privateConstructorUsedError;
+  @override
+  String? get accessToken => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$LocalStateCopyWith<_LocalState> get copyWith =>
+  _$$_LocalStateCopyWith<_$_LocalState> get copyWith =>
       throw _privateConstructorUsedError;
 }

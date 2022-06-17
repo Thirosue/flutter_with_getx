@@ -1,22 +1,24 @@
-import 'package:flutter_with_getx/data/const/const.dart';
+import 'dart:convert';
+
+import 'package:flutter_with_getx/data/const/state_key.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';
-import 'package:hive/hive.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../model/local_state.dart';
 
 class StateRepository {
   LocalState read() {
-    final store = Hive.box(Const.storeKey);
-    if (store.isEmpty || store.getAt(0) == null) {
-      return const LocalState(
-        name: 'unknown',
-      );
+    var json = GetStorage().read(StateKey.store);
+    if (json != null) {
+      return LocalState.fromJson(jsonDecode(json));
     } else {
-      return store.getAt(0)!;
+      return const LocalState(
+        token: 'dummy',
+      );
     }
   }
 
-  void write(LocalState value) {
-    Hive.box(Const.storeKey).add(value);
+  void save(LocalState value) {
+    GetStorage().write(StateKey.store, jsonEncode(value));
   }
 }

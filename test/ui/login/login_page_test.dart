@@ -21,6 +21,7 @@ var fcmToken =
 var token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 var state = LocalState(
+  token: fcmToken,
   name: 'john doe',
   idToken: token,
   refreshToken: token,
@@ -36,6 +37,8 @@ var device = Device(
   DeviceRepository,
 ])
 void main() async {
+  Get.testMode = true;
+
   final mock = MockAuthRepository();
   final stateMock = MockStateRepository();
   final deviceMock = MockDeviceRepository();
@@ -48,7 +51,6 @@ void main() async {
   }
 
   setUp(() async {
-    Get.testMode = true;
     Get.put(LoginController(
       mock,
       stateMock,
@@ -154,7 +156,7 @@ void main() async {
       // given
       when(mock.auth(email: 'test@test.com', password: 'password'))
           .thenAnswer((_) => Future.value(response));
-      when(stateMock.write(state)).thenAnswer((_) => Future<void>.value());
+      when(stateMock.save(state)).thenAnswer((_) => Future<void>.value());
       when(stateMock.read()).thenReturn(state);
       when(deviceMock.save(device)).thenAnswer((_) => Future<void>.value());
 
