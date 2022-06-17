@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_with_getx/component/templates/custom_theme.dart';
-import 'package:flutter_with_getx/data/const/state_key.dart';
 import 'package:flutter_with_getx/data/const/path.dart';
 import 'package:flutter_with_getx/data/model/device/device.dart';
 import 'package:flutter_with_getx/data/model/local_state.dart';

@@ -52,7 +52,7 @@ class CardPage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: controller.obx(
           (state) {
-            final _creditCards = state
+            final creditCards = state
                 ?.map(
                   (value) => CreditCard(
                     cardBackground: cardBackgrounds[
@@ -71,7 +71,7 @@ class CardPage extends StatelessWidget {
 
             return Center(
               child: CreditCardSlider(
-                _creditCards,
+                creditCards,
                 repeatCards: RepeatCards.bothDirection,
                 onCardClicked: (index) {
                   debugPrint('Clicked at index: $index');

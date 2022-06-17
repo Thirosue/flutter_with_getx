@@ -9,10 +9,6 @@ class DialogActions {
     return [
       ElevatedButton(
         onPressed: () => Get.back(),
-        child: Text(
-          "Cancel",
-          style: Theme.of(context).textTheme.bodyText2,
-        ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(
             Colors.white,
@@ -23,6 +19,10 @@ class DialogActions {
               side: BorderSide(color: Theme.of(context).primaryColor),
             ),
           ),
+        ),
+        child: Text(
+          "Cancel",
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ),
       ElevatedButton(

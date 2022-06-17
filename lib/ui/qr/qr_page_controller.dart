@@ -26,7 +26,7 @@ class QRPageController extends GetxController {
       if (scannnedQrcode != "-1") {
         Get.snackbar(
           'Result',
-          "QR Code:" + scannnedQrcode,
+          "QR Code:$scannnedQrcode",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.green,
           colorText: Colors.white,
